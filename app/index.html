@@ -23,19 +23,43 @@
   </head>
   <body>
 
-    <div class="hero-unit">
-      <h1>'Allo, 'Allo!</h1>
-      <p>You now have</p>
-      <ul>
-        <li>HTML5 Boilerplate</li>
-        <li>Normalize CSS</li>
-        <li>Sass</li>
-        <li>Modernizr</li>
-        <li>Bourbon & Neat</li>
-        <li>UnderscoreJS</li>
-      </ul>
-      <p>Don't forget to update your readme file!!</p>
+    <div class="container">
+      <h1>Blog Title</h1>
+
+      <div id='blogposts'>
+      </div>
+
     </div>
+
+    <script type='text/template' id='mainblog'>
+
+    </script>
+
+    <script type='text/template' id='usersignin'>
+      <form id='login'>
+        <input id='username' placeholder='Please Enter User Name'/>
+        <input id='password' placeholder='Please Enter Password'/>
+        <button>Log In</button>
+      </form>
+    </script>
+
+    <script type='text/template' id='adduser'>
+      <form id='newuser'>
+        <input id='newusername' placeholder = 'Enter an User ID'/>
+        <input id='newpassword' placeholder = 'Enter a Password'/>
+        <input id='confirmpword' placeholder = 'Confirm Password'/>
+        <button>Submit New User</button>
+      </form>
+
+    </script>
+
+    <script type='text/template' id='addpost'>
+
+    </script>
+
+    <script type='text/template' id='editpost'>
+
+    </script>
 
     <!-- build:js scripts/vendor.js -->
     <!-- bower:js -->
@@ -54,8 +78,8 @@
         <script src="scripts/views/add_post_view.js"></script>
         <script src="scripts/views/edit_post_view.js"></script>
         <script src="scripts/views/list_post_view.js"></script>
-        <script src="scripts/user_login_view.js"></script>
-        <script src="scripts/user_signup_view.js"></script>
+        <script src="scripts/views/user_login_view.js"></script>
+        <script src="scripts/views/user_signup_view.js"></script>
         <script src="scripts/main.js"></script>
         <!-- endbuild -->
 </body>
