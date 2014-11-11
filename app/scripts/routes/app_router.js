@@ -3,10 +3,23 @@
 
   App.Routers.approuter = Parse.Router.extend({
 
-//console.log('Hey there sexy');    
+    routes: {
+      '' : 'home',
+      'add' : 'addPost'
+    },
 
-  })
+    home: function(){
+
+    },
+
+    addPost: function(){
+      console.log('On-on');
+
+      new App.Views.AddPost();
+
+    }
 
 
+  });
 
 }());
