@@ -3,13 +3,18 @@
 
   App.Routers.approuter = Parse.Router.extend({
 
+    initialize: function () {
+      // Light the Fire
+      Parse.history.start();
+    },
+
     routes: {
       '' : 'home',
-      'add' : 'addPost'
+      'add' : 'addPost',
     },
 
     home: function(){
-
+      new App.Views.Login();
     },
 
     addPost: function(){
