@@ -4,7 +4,7 @@
   App.Views.AddPost = Parse.View.extend({
 
     events: {
-      'click #addBtn' : 'addpost'
+      'submit #newpost' : 'addpost'
     },
 
     initialize: function(){
@@ -21,14 +21,17 @@
 
     addpost: function(e){
       e.preventDefault();
+      console.log("hohoho");
 
       var post = new App.Models.Post({
-        title: $('#newusername').val(),
+        title: $('#input_title').val(),
         content: $('#blogcontent').val(),
-        tags: $('newtags').val(),
+        tags: $('#newtags').val(),
         //add user
         //add time and date stamp
       });
+
+      console.log(input_title);
 
       post.save(null, {
       success: function () {
