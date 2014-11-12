@@ -20,7 +20,9 @@
 
       <div class="login">
         <h2>Login</h2>
-         <div id="logged"></div>
+         <div id="logged">
+         <span id="loggedIn"></span>
+         </div>
         <h2>Signup</h2>
           <div id="signed"></div>
       </div>
@@ -39,14 +41,15 @@
     </div>
 
     <script type='text/template' id='mainblog'>
-      <li class="blogger" id="<%= objectId %>"><%= title %></li>
+      <li class="blogger" id="<%= objectId %>"><%= title %> <%= content %></li>
     </script>
 
     <script type='text/template' id='usersignin'>
       <form id='login'>
         <input id='username' placeholder='Please Enter User Name'/>
         <input id='password' placeholder='Please Enter Password'/>
-        <button>Log In</button>
+        <button id"login">Log In</button>
+        <button id"logOut">Log Out</button>
       </form>
     </script>
 
