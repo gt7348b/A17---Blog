@@ -28,7 +28,7 @@ App.Views.Login = Parse.View.extend ({
 
     e.preventDefault();
 
-    var userName = $('#username').val();
+    var username = $('#username').val();
     var password = $('#password').val();
 
     Parse.User.logIn(username, password, {

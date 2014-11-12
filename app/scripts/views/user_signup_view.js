@@ -27,8 +27,9 @@ App.Views.SignUp = Parse.View.extend({
     var username = $('#newusername').val();
     var password = $('#newpassword').val();
     console.log(username);
+    console.log(password);
 
-    var user = new Parse.user();
+    var user = new Parse.User();
       user.set('username', username);
       user.set('password', password);
 

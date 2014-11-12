@@ -27,7 +27,7 @@
         title: $('#input_title').val(),
         content: $('#blogcontent').val(),
         tags: $('#newtags').val(),
-        //add user
+      //  user: App.user,
         //add time and date stamp
       });
 

@@ -31,7 +31,6 @@ App.Views.ListBlogs = Parse.View.extend ({
     this.$el.empty();
 
       this.collection.each(function (s) {
-        console.log(self.template);
         self.$el.append(self.template(s.toJSON()));
       })
 

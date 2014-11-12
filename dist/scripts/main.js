@@ -73,7 +73,7 @@
         title: $('#input_title').val(),
         content: $('#blogcontent').val(),
         tags: $('#newtags').val(),
-        //add user
+      //  user: App.user,
         //add time and date stamp
       });
 
@@ -134,7 +134,6 @@ App.Views.ListBlogs = Parse.View.extend ({
     this.$el.empty();
 
       this.collection.each(function (s) {
-        console.log(self.template);
         self.$el.append(self.template(s.toJSON()));
       })
 
@@ -177,7 +176,7 @@ App.Views.Login = Parse.View.extend ({
 
     e.preventDefault();
 
-    var userName = $('#username').val();
+    var username = $('#username').val();
     var password = $('#password').val();
 
     Parse.User.logIn(username, password, {
@@ -227,8 +226,9 @@ App.Views.SignUp = Parse.View.extend({
     var username = $('#newusername').val();
     var password = $('#newpassword').val();
     console.log(username);
+    console.log(password);
 
-    var user = new Parse.user();
+    var user = new Parse.User();
       user.set('username', username);
       user.set('password', password);
 
@@ -301,6 +301,30 @@ Parse.initialize("wF5Pd5fI6w6c5jbKHdEM9qKg3lLaQAw7phwYLnz2", "aKAGgKJ26LBBhqksgQ
       console.log('on-on');
       Parse.history.start();
     })
+
+    // Log Out
+//  $('#logOut').on('click', function (e) {
+  //  e.preventDefault();
+    //Parse.User.logOut();
+    //App.updateUser();
+    //App.router.navigate('login', {trigger: true});
+  //});
+
+  // Update User
+  App.updateUser = function (){
+    App.user = Parse.User.current();
+    var currUsr;
+    if (App.user == null){
+      currUsr = '';
+      $('#logOut').text('Log In');
+    } else {
+      currUsr = 'Welcome ' + App.user.attributes.username;
+      $('#logOut').text('Log In');
+    }
+    $('#loggedIn').html(currUsr);
+  };
+  //console.log(App.updateUser);
+  App.updateUser();
 
 
 }());
