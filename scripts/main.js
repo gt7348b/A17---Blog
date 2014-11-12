@@ -6,17 +6,6 @@
           App.Views = {};
           App.Routers = {};
 
-(function(){
-
-  App.Collections.Blogposts = Parse.Collection.extend({
-
-    model: App.Models.Post,
-
-  });
-
-
-}());
-
 
 (function(){
 
@@ -38,6 +27,17 @@
       console.log("Lucky?");
 
     }
+
+  });
+
+
+}());
+
+(function(){
+
+  App.Collections.Blogposts = Parse.Collection.extend({
+
+    model: App.Models.Post,
 
   });
 
@@ -111,7 +111,7 @@ App.Views.ListBlogs = Parse.View.extend ({
 
     events: {},
 
-    template: $('#mainblog').html(),
+    template: _.template($('#mainblog').html()),
 
   initialize: function(options) {
 
@@ -133,7 +133,8 @@ App.Views.ListBlogs = Parse.View.extend ({
     //clears our element
     this.$el.empty();
 
-      _.each(list_collection, function (s) {
+      this.collection.each(function (s) {
+        console.log(self.template);
         self.$el.append(self.template(s.toJSON()));
       })
 
@@ -202,15 +203,13 @@ App.Views.Login = Parse.View.extend ({
 
 App.Views.SignUp = Parse.View.extend({
 
-  className: "SignUp",
-
   events: {
     "submit #newuser" : "signupUser",
   },
 
   template: $("#adduser").html(),
 
-  intialize: function() {
+  initialize: function() {
     this.render();
 
     $("#signed").html(this.$el);
@@ -255,7 +254,7 @@ App.Views.SignUp = Parse.View.extend({
 
     initialize: function () {
       // Light the Fire
-      Parse.history.start();
+
     },
 
     routes: {
@@ -266,6 +265,7 @@ App.Views.SignUp = Parse.View.extend({
     home: function(){
       new App.Views.Login();
       new App.Views.SignUp();
+      new App.Views.ListBlogs({ collection: App.blog_posts});
     },
 
     addPost: function(){
@@ -292,16 +292,15 @@ Parse.initialize("wF5Pd5fI6w6c5jbKHdEM9qKg3lLaQAw7phwYLnz2", "aKAGgKJ26LBBhqksgQ
 
     App.blog_posts = new App.Collections.Blogposts();
 
-      console.log('Are you?');
+      console.log(App.blog_posts);
 
-    //App.blog_posts.fetch().done(function(){
-
-      //console.log(App.blog_posts);
+      App.blog_posts.fetch().done(function() {
 
       App.router = new App.Routers.approuter();
-      console.log('on-on');
 
-    //})
+      console.log('on-on');
+      Parse.history.start();
+    })
 
 
 }());
