@@ -16,7 +16,7 @@
     idAttribute: 'objectID',
 
     initialize: function(){
-      console.log("Lucky?");
+      //console.log("Lucky?");
 
     }
 

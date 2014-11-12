@@ -10,13 +10,13 @@ Parse.initialize("wF5Pd5fI6w6c5jbKHdEM9qKg3lLaQAw7phwYLnz2", "aKAGgKJ26LBBhqksgQ
 
     App.blog_posts = new App.Collections.Blogposts();
 
-      console.log(App.blog_posts);
+      //console.log(App.blog_posts);
 
       App.blog_posts.fetch().done(function() {
 
       App.router = new App.Routers.approuter();
 
-      console.log('on-on');
+      //console.log('on-on');
       Parse.history.start();
     })
 
