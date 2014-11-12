@@ -15,10 +15,11 @@
 
     home: function(){
       new App.Views.Login();
+      new App.Views.SignUp();
     },
 
     addPost: function(){
-      console.log('On-on');
+  //    console.log('On-on');
 
       new App.Views.AddPost();
 

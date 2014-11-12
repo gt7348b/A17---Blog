@@ -3,9 +3,9 @@
 
 App.Views.Login = Parse.View.extend ({
 
-  className:"LogIn",
+  className: "LogIn",
 
-  event: {
+  events: {
 
     "submit #login" : "loginUser",
 
@@ -27,14 +27,14 @@ App.Views.Login = Parse.View.extend ({
   loginUser: function(e) {
 
     e.preventDefault();
-    
+
     var userName = $('#username').val();
     var password = $('#password').val();
 
     Parse.User.logIn(username, password, {
       success: function(user){
         App.updateUser();
-        App.router.navigate('', {trigger:true});
+        //App.router.navigate('', {trigger:true});
       },
 
       error: function(user, error) {

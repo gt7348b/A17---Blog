@@ -47,47 +47,16 @@
 
 (function(){
 
-  App.Routers.approuter = Parse.Router.extend({
-
-    initialize: function () {
-      // Light the Fire
-      Parse.history.start();
-    },
-
-    routes: {
-      '' : 'home',
-      'add' : 'addPost',
-    },
-
-    home: function(){
-      new App.Views.Login();
-    },
-
-    addPost: function(){
-      console.log('On-on');
-
-      new App.Views.AddPost();
-
-    }
-
-
-  });
-
-}());
-
-
-(function(){
-
   App.Views.AddPost = Parse.View.extend({
 
     events: {
-      'submit #addpost' : 'addpost'
+      'click #addBtn' : 'addpost'
     },
 
     initialize: function(){
       this.render();
 
-      $('#blogposts').html();
+      $('.addedPost').html(this.$el);
 
     },
 
@@ -107,6 +76,15 @@
         //add time and date stamp
       });
 
+      post.save(null, {
+      success: function () {
+        App.blog_posts.add(post);
+      }
+    });
+
+    //clear my form
+    $("#newpost")[0].reset();
+
     }
 
 
@@ -123,6 +101,44 @@
 
 (function(){
 
+App.Views.ListBlogs = Parse.View.extend ({
+
+  tagName: 'ul',
+  className: 'Show',
+
+    events: {},
+
+    template: $('#mainblog').html(),
+
+  initialize: function(options) {
+
+    this.options = options;
+
+    this.render();
+
+    this.collection.off();
+    this.collection.on('sync', this.render, this);
+
+    $('#listBlogs').html(this.$el);
+
+  },
+
+  render: function(){
+
+    var self = this;
+
+    //clears our element
+    this.$el.empty();
+
+      _.each(list_collection, function (s) {
+        self.$el.append(self.template(s.toJSON()));
+      })
+
+      return this;
+  },
+
+
+});
 
 
 }());
@@ -132,9 +148,9 @@
 
 App.Views.Login = Parse.View.extend ({
 
-  className:"LogIn",
+  className: "LogIn",
 
-  event: {
+  events: {
 
     "submit #login" : "loginUser",
 
@@ -156,14 +172,14 @@ App.Views.Login = Parse.View.extend ({
   loginUser: function(e) {
 
     e.preventDefault();
-    
+
     var userName = $('#username').val();
     var password = $('#password').val();
 
     Parse.User.logIn(username, password, {
       success: function(user){
         App.updateUser();
-        App.router.navigate('', {trigger:true});
+        //App.router.navigate('', {trigger:true});
       },
 
       error: function(user, error) {
@@ -181,7 +197,83 @@ App.Views.Login = Parse.View.extend ({
 
 (function(){
 
+App.Views.SignUp = Parse.View.extend({
 
+  className: "SignUp",
+
+  events: {
+    "submit #newuser" : "signupUser",
+  },
+
+  template: $("#adduser").html(),
+
+  intialize: function() {
+    this.render();
+
+    $("#signed").html(this.$el);
+  },
+
+
+  render: function() {
+    this.$el.html(this.template);
+  },
+
+  signupUser: function(e) {
+
+    e.preventDefault();
+
+    var username = $('#newusername').val();
+    var password = $('#newpassword').val();
+    console.log(username);
+
+    var user = new Parse.user();
+      user.set('username', username);
+      user.set('password', password);
+
+    user.signUp (null, {
+      success: function(user) {
+      },
+      error: function(user, error){
+        alert("Error Signup");
+      }
+
+    });
+
+  }
+
+});
+
+}());
+
+
+(function(){
+
+  App.Routers.approuter = Parse.Router.extend({
+
+    initialize: function () {
+      // Light the Fire
+      Parse.history.start();
+    },
+
+    routes: {
+      '' : 'home',
+      'add' : 'addPost',
+    },
+
+    home: function(){
+      new App.Views.Login();
+      new App.Views.SignUp();
+    },
+
+    addPost: function(){
+  //    console.log('On-on');
+
+      new App.Views.AddPost();
+
+    }
+
+
+  });
 
 }());
 

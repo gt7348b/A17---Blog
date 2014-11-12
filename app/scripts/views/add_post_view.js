@@ -4,13 +4,13 @@
   App.Views.AddPost = Parse.View.extend({
 
     events: {
-      'submit #addpost' : 'addpost'
+      'click #addBtn' : 'addpost'
     },
 
     initialize: function(){
       this.render();
 
-      $('#blogposts').html();
+      $('.addedPost').html(this.$el);
 
     },
 
@@ -29,6 +29,15 @@
         //add user
         //add time and date stamp
       });
+
+      post.save(null, {
+      success: function () {
+        App.blog_posts.add(post);
+      }
+    });
+
+    //clear my form
+    $("#newpost")[0].reset();
 
     }
 

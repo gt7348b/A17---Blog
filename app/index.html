@@ -35,17 +35,19 @@
 
       <div class="addIt">
         <h2>Add New Post</h2>
+          <div class="addedPost"></div>
         <a href="#/add" class="addBtn"><button>Add New Post</button></a>
       </div>
 
       <div id='blogposts'>
         <h2>List of Blogs</h2>
+          <div id="listBlogs"></div>
       </div>
 
     </div>
 
     <script type='text/template' id='mainblog'>
-
+      <li class="blogger" id="<%= objectId %>"></li>
     </script>
 
     <script type='text/template' id='usersignin'>
@@ -67,7 +69,7 @@
     </script>
 
     <script type='text/template' id='addpost'>
-      <h2>Add a New Post!</h2>
+
       <form id='newpost'>
         <input id='input_title' type='text' placeholder='Enter a Title'/>
         <textarea id='blogcontent' type='text' placeholder='Enter content'/>
@@ -92,12 +94,12 @@
         <script src="scripts/setup.js"></script>
         <script src="scripts/collections/post_collection.js"></script>
         <script src="scripts/models/post_model.js"></script>
-        <script src="scripts/routes/app_router.js"></script>
         <script src="scripts/views/add_post_view.js"></script>
         <script src="scripts/views/edit_post_view.js"></script>
         <script src="scripts/views/list_post_view.js"></script>
         <script src="scripts/views/user_login_view.js"></script>
         <script src="scripts/views/user_signup_view.js"></script>
+        <script src="scripts/routes/app_router.js"></script>
         <script src="scripts/main.js"></script>
         <!-- endbuild -->
 </body>
