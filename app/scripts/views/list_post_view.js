@@ -8,7 +8,7 @@ App.Views.ListBlogs = Parse.View.extend ({
 
     events: {},
 
-    template: $('#mainblog').html(),
+    template: _.template($('#mainblog').html()),
 
   initialize: function(options) {
 
@@ -30,7 +30,8 @@ App.Views.ListBlogs = Parse.View.extend ({
     //clears our element
     this.$el.empty();
 
-      _.each(list_collection, function (s) {
+      this.collection.each(function (s) {
+        console.log(self.template);
         self.$el.append(self.template(s.toJSON()));
       })
 

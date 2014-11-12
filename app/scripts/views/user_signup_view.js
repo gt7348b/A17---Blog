@@ -3,15 +3,13 @@
 
 App.Views.SignUp = Parse.View.extend({
 
-  className: "SignUp",
-
   events: {
     "submit #newuser" : "signupUser",
   },
 
   template: $("#adduser").html(),
 
-  intialize: function() {
+  initialize: function() {
     this.render();
 
     $("#signed").html(this.$el);

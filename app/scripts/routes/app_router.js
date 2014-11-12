@@ -5,7 +5,7 @@
 
     initialize: function () {
       // Light the Fire
-      Parse.history.start();
+
     },
 
     routes: {
@@ -16,6 +16,7 @@
     home: function(){
       new App.Views.Login();
       new App.Views.SignUp();
+      new App.Views.ListBlogs({ collection: App.blog_posts});
     },
 
     addPost: function(){

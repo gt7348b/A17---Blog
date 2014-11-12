@@ -47,7 +47,7 @@
     </div>
 
     <script type='text/template' id='mainblog'>
-      <li class="blogger" id="<%= objectId %>"></li>
+      <li class="blogger" id="<%= objectId %>"><%= title %></li>
     </script>
 
     <script type='text/template' id='usersignin'>
@@ -91,8 +91,8 @@
 
         <!-- build:js scripts/main.js -->
         <script src="scripts/setup.js"></script>
-        <script src="scripts/collections/post_collection.js"></script>
         <script src="scripts/models/post_model.js"></script>
+        <script src="scripts/collections/post_collection.js"></script>
         <script src="scripts/views/add_post_view.js"></script>
         <script src="scripts/views/edit_post_view.js"></script>
         <script src="scripts/views/list_post_view.js"></script>
