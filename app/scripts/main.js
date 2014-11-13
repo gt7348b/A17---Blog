@@ -21,12 +21,15 @@ Parse.initialize("wF5Pd5fI6w6c5jbKHdEM9qKg3lLaQAw7phwYLnz2", "aKAGgKJ26LBBhqksgQ
     })
 
     // Log Out
-//  $('#logOut').on('click', function (e) {
-  //  e.preventDefault();
+  //$('#logout').on('click', function (e) {
+    //e.preventDefault();
+
     //Parse.User.logOut();
     //App.updateUser();
+    //console.log(App.user);
+    //console.log('Logged out');
     //App.router.navigate('login', {trigger: true});
-  //});
+    //});
 
   // Update User
   App.updateUser = function (){
