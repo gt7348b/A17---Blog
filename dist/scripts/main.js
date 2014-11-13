@@ -93,6 +93,13 @@
         //add time and date stamp
       });
 
+      //Set Control
+      post.setACL(new Parse.ACL(App.user));
+
+      var postACL = new Parse.ACL(Parse.User.current());
+
+      postACL.setPublicReadAccess(true);
+
       console.log(input_title);
 
       post.save(null, {
@@ -251,6 +258,7 @@ App.Views.ListBlogs = Parse.View.extend ({
 
     render: function () {
       this.$el.empty();
+      console.log(this);
       this.$el.html(this.template(this.options.blogs.toJSON()));
 
       var commentTemplate = _.template($('#CommentTemp').html());

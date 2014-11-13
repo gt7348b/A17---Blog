@@ -22,6 +22,7 @@
 
     render: function () {
       this.$el.empty();
+      console.log(this);
       this.$el.html(this.template(this.options.blogs.toJSON()));
 
       var commentTemplate = _.template($('#CommentTemp').html());

@@ -31,6 +31,13 @@
         //add time and date stamp
       });
 
+      //Set Control
+      post.setACL(new Parse.ACL(App.user));
+
+      var postACL = new Parse.ACL(Parse.User.current());
+
+      postACL.setPublicReadAccess(true);
+
       console.log(input_title);
 
       post.save(null, {
