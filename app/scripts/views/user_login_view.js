@@ -8,7 +8,7 @@ App.Views.Login = Parse.View.extend ({
   events: {
 
     "submit #login" : "loginUser",
-
+  //  "submit #logout" : "logoutUser",
   },
 
   template: $("#usersignin").html(),
@@ -45,8 +45,18 @@ App.Views.Login = Parse.View.extend ({
 
     });
 
-  }
+    //clear my form
+    $("#login")[0].reset();
+    
+  },
 
+//  logoutUser: function(e) {
+  //  e.preventDefault();
+
+    //Parse.User.logOut();
+    //console.log(App.user);
+
+  //}
 });
 
 }());
