@@ -111,9 +111,52 @@
 
 }());
 
-(function(){
+(function () {
 
+  App.Views.EditBlog = Parse.View.extend({
 
+    tagName: 'ul',
+    className: 'EditBlog',
+
+    events: {
+      'submit #BlogOne' : 'updateBlog',
+    },
+
+    template: _.template($('#singleBlog').html()),
+
+    initialize: function (options) {
+      this.options = options;
+      this.render();
+
+      // Get our Element On Our Page
+      $('#listBlogs').html(this.$el);
+    },
+
+    render: function () {
+      this.$el.empty();
+      this.$el.html(this.template(this.options.blogs.toJSON()));
+
+    },
+
+    updateBlog: function (e) {
+      e.preventDefault();
+
+      // Update our Model Instance
+      this.options.blogs.set({
+        title: $("#update_title").val(),
+        content: $("#update_content").val(),
+        tags: $("#update_tags").val(),
+      });
+
+      // Save Instance
+      this.options.blogs.save();
+
+      // Return to home page
+      App.router.navigate('', {trigger: true});
+
+    },
+
+  });
 
 }());
 
@@ -126,13 +169,8 @@ App.Views.ListBlogs = Parse.View.extend ({
   className: 'Show',
 
     events: {
-<<<<<<< HEAD
-      'click #addComment' : 'addComment',
+
     },
-=======
-        'click span': 'deleteSong'
-      },
->>>>>>> fc81933f714d5857fe2710c9855f240b974599eb
 
     template: _.template($('#mainblog').html()),
 
@@ -197,12 +235,13 @@ App.Views.ListBlogs = Parse.View.extend ({
     className: 'BlogSingle',
 
     events: {
-      'submit #BlogOne' : 'updateBlog',
+      'submit #formComment' : 'commentBlog',
     },
 
-    template: _.template($('#singleBlog').html()),
+    template: _.template($('#ReadTemp').html()),
 
     initialize: function (options) {
+      console.log("Hey");
       this.options = options;
       this.render();
 
@@ -214,23 +253,40 @@ App.Views.ListBlogs = Parse.View.extend ({
       this.$el.empty();
       this.$el.html(this.template(this.options.blogs.toJSON()));
 
+      var commentTemplate = _.template($('#CommentTemp').html());
+      var comment_query = new Parse.Query(App.Models.Comment);
+
+      comment_query.equalTo('parent', this.options.blogs);
+
+      this.$el.append('<h2>Comments</h2><ul class="commented"></ul>');
+
+      comment_query.find({
+        success: function (results) {
+          console.log(results);
+          _.each(results, function(comment) {
+            $('ul.commented').append(commentTemplate(comment.toJSON()));
+          })
+        }
+      })
+
     },
 
-    updateBlog: function (e) {
+    commentBlog: function (e) {
       e.preventDefault();
 
-      // Update our Model Instance
-      this.options.blogs.set({
-        title: $("#update_title").val(),
-        content: $("#update_content").val(),
-        tags: $("#update_tags").val(),
+      var commented = new App.Models.Comment({
+
+        comments: $('#comments').val(),
+        parent: this.options.blogs
+
       });
 
-      // Save Instance
-      this.options.blogs.save();
-
-      // Return to home page
-      App.router.navigate('', {trigger: true});
+      commented.save(null, {
+        success: function () {
+          console.log('Comment has been added');
+        //  App.router.navigate('', {trigger: true});
+        }
+     });
 
     },
 
@@ -368,7 +424,7 @@ App.Views.SignUp = Parse.View.extend({
 
     initialize: function () {
 
-    Parse.history.start();
+    //Parse.history.start();
 
     },
 
@@ -376,7 +432,7 @@ App.Views.SignUp = Parse.View.extend({
       '' : 'home',
       'add' : 'addPost',
       'edit/:id' : 'editBlog',
-    //  'comment/:id' : 'commentBlog',
+      'comment/:id' : 'commentBlog'
     },
 
     home: function(){
@@ -391,7 +447,12 @@ App.Views.SignUp = Parse.View.extend({
 
     editBlog: function(id){
       var e = App.blog_posts.get(id);
-     new App.Views.SingleBlog({blogs: e});
+     new App.Views.EditBlog({blogs: e});
+    },
+
+    commentBlog: function(id){
+      var c = App.blog_posts.get(id);
+     new App.Views.SingleBlog({blogs: c});
     },
 
   });
@@ -416,11 +477,10 @@ Parse.initialize("wF5Pd5fI6w6c5jbKHdEM9qKg3lLaQAw7phwYLnz2", "aKAGgKJ26LBBhqksgQ
 
       App.router = new App.Routers.approuter();
 
-<<<<<<< HEAD
-=======
+
       //console.log('on-on');
       Parse.history.start();
->>>>>>> fc81933f714d5857fe2710c9855f240b974599eb
+
     })
 
     // Log Out

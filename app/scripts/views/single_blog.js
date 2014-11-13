@@ -6,12 +6,13 @@
     className: 'BlogSingle',
 
     events: {
-      'submit #BlogOne' : 'updateBlog',
+      'submit #formComment' : 'commentBlog',
     },
 
-    template: _.template($('#singleBlog').html()),
+    template: _.template($('#ReadTemp').html()),
 
     initialize: function (options) {
+      console.log("Hey");
       this.options = options;
       this.render();
 
@@ -23,23 +24,40 @@
       this.$el.empty();
       this.$el.html(this.template(this.options.blogs.toJSON()));
 
+      var commentTemplate = _.template($('#CommentTemp').html());
+      var comment_query = new Parse.Query(App.Models.Comment);
+
+      comment_query.equalTo('parent', this.options.blogs);
+
+      this.$el.append('<h2>Comments</h2><ul class="commented"></ul>');
+
+      comment_query.find({
+        success: function (results) {
+          console.log(results);
+          _.each(results, function(comment) {
+            $('ul.commented').append(commentTemplate(comment.toJSON()));
+          })
+        }
+      })
+
     },
 
-    updateBlog: function (e) {
+    commentBlog: function (e) {
       e.preventDefault();
 
-      // Update our Model Instance
-      this.options.blogs.set({
-        title: $("#update_title").val(),
-        content: $("#update_content").val(),
-        tags: $("#update_tags").val(),
+      var commented = new App.Models.Comment({
+
+        comments: $('#comments').val(),
+        parent: this.options.blogs
+
       });
 
-      // Save Instance
-      this.options.blogs.save();
-
-      // Return to home page
-      App.router.navigate('', {trigger: true});
+      commented.save(null, {
+        success: function () {
+          console.log('Comment has been added');
+        //  App.router.navigate('', {trigger: true});
+        }
+     });
 
     },
 

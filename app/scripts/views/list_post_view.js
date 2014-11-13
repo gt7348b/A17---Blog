@@ -7,7 +7,7 @@ App.Views.ListBlogs = Parse.View.extend ({
   className: 'Show',
 
     events: {
-      'click #addComment' : 'addComment',
+
     },
 
     template: _.template($('#mainblog').html()),

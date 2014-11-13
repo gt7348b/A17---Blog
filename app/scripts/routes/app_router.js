@@ -5,7 +5,7 @@
 
     initialize: function () {
 
-    Parse.history.start();
+    //Parse.history.start();
 
     },
 
@@ -13,7 +13,7 @@
       '' : 'home',
       'add' : 'addPost',
       'edit/:id' : 'editBlog',
-    //  'comment/:id' : 'commentBlog',
+      'comment/:id' : 'commentBlog'
     },
 
     home: function(){
@@ -28,7 +28,12 @@
 
     editBlog: function(id){
       var e = App.blog_posts.get(id);
-     new App.Views.SingleBlog({blogs: e});
+     new App.Views.EditBlog({blogs: e});
+    },
+
+    commentBlog: function(id){
+      var c = App.blog_posts.get(id);
+     new App.Views.SingleBlog({blogs: c});
     },
 
   });

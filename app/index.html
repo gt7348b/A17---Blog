@@ -51,23 +51,34 @@
         <div class="blogged">
             <h4><%= title %> </h4>
             <p><%= content %></p>
-            <a href="#/comment<%= objectId %>"><button id="commentBtn">Add Comment</button></a>
-            <a href="#/edit/<%= objectId %>"><div id="updateButton">Edit</div></a>
+            <a href="#/comment/<%= objectId %>"><button id="commentBtn">Add Comment</button></a>
+            <a href="#/edit/<%= objectId %>"><button id="updateButton">Edit</button></a>
         </div>
       </li>
     </script>
 
-<!--    <script type="text/template" id="CommentTemp">
-      <li><%= comments %></li><div id="deleteButton2">Delete</div>
+    <script type="text/template" id="CommentTemp">
+      <li><%= comments %></li>
     </script>
-    <div class="comment_info">
-      <form id="formComment">
-        <textarea id="comment" placeholder="Add a Comment"></textarea>
-          <button id="addComment">Comment</button>
-      </form>
-    </div> -->
+
+    <script type="text/template" id="ReadTemp">
+      <li class="readIt" id="<%= objectId %>">
+       <div class="blog_info">
+        <h3><%= title %></h3>
+        <p><%= content %></p>
+       </div>
+        <div class="comment_info">
+          <form id="formComment">
+              <textarea id="comments" placeholder="Add a Comment"></textarea>
+                <button id="commentPost">Post Comment</button>
+                <a href='#/'><button id="home">Return</button></a>
+          </form>
+        </div>
+      </li>
+    </script>
 
    <script type="text/template" id="singleBlog">
+    <h2>Edit Your Blog</h2>
       <li class="soloBlog" id="<%= objectId %>">
         <form id="BlogOne">
           <div class="blog-header">
@@ -75,7 +86,7 @@
             <textarea id='update_content' type='text' value="<%= content %>" placeholder='Enter content'/>
             <input id='update_tags' type='text' value="<%= tags %>"placeholder='tags'/>
           </div>
-          <button>Edit It!</button>
+          <button id="Edit">Edit It!</button>
         </form>
       </li>
     </script>
