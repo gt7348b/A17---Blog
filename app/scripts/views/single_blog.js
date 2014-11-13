@@ -7,12 +7,12 @@
 
     events: {
       'submit #formComment' : 'commentBlog',
+      'click #home' : 'returnMain',
     },
 
     template: _.template($('#ReadTemp').html()),
 
     initialize: function (options) {
-      console.log("Hey");
       this.options = options;
       this.render();
 
@@ -60,6 +60,11 @@
      });
 
     },
+
+    returnMain: function(e){
+      App.router.navigate('', {trigger: true});
+    },
+
 
   });
 

@@ -236,12 +236,12 @@ App.Views.ListBlogs = Parse.View.extend ({
 
     events: {
       'submit #formComment' : 'commentBlog',
+      'click #home' : 'returnMain',
     },
 
     template: _.template($('#ReadTemp').html()),
 
     initialize: function (options) {
-      console.log("Hey");
       this.options = options;
       this.render();
 
@@ -289,6 +289,11 @@ App.Views.ListBlogs = Parse.View.extend ({
      });
 
     },
+
+    returnMain: function(e){
+      App.router.navigate('', {trigger: true});
+    },
+
 
   });
 
