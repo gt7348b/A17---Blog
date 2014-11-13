@@ -26,22 +26,32 @@ App.Views.SignUp = Parse.View.extend({
 
     var username = $('#newusername').val();
     var password = $('#newpassword').val();
+    var ckpassword = $('#confirmpword').val();
     console.log(username);
     console.log(password);
 
-    var user = new Parse.User();
-      user.set('username', username);
-      user.set('password', password);
+    //Check if passwords match and add new user if true
 
-    user.signUp (null, {
-      success: function(user) {
-      },
-      error: function(user, error){
-        alert("Error Signup");
+    if ( password === ckpassword ){
+
+          var user = new Parse.User();
+          user.set('username', username);
+          user.set('password', password);
+
+        user.signUp (null, {
+          success: function(user) {
+          },
+          error: function(user, error){
+            alert("Error Signup");
+          }
+        });
+      } else {
+          window.alert('Passwords Do Not Match');        
       }
 
-    });
+    //Clear form
 
+    $("#newuser")[0].reset();
   }
 
 });
