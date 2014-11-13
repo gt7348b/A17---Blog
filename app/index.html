@@ -46,10 +46,38 @@
           <div id="listBlogs"></div>
       </div>
 
-    </div>
-
     <script type='text/template' id='mainblog'>
-      <li class="blogger" id="<%= objectId %>"><%= title %> <%= content %></li>
+      <li class="blogger" id="<%= objectId %>">
+        <div class="blogged">
+            <h4><%= title %> </h4>
+            <p><%= content %></p>
+            <a href="#/comment<%= objectId %>"><button id="commentBtn">Add Comment</button></a>
+            <a href="#/edit/<%= objectId %>"><div id="updateButton">Edit</div></a>
+        </div>
+      </li>
+    </script>
+
+<!--    <script type="text/template" id="CommentTemp">
+      <li><%= comments %></li><div id="deleteButton2">Delete</div>
+    </script>
+    <div class="comment_info">
+      <form id="formComment">
+        <textarea id="comment" placeholder="Add a Comment"></textarea>
+          <button id="addComment">Comment</button>
+      </form>
+    </div> -->
+
+   <script type="text/template" id="singleBlog">
+      <li class="soloBlog" id="<%= objectId %>">
+        <form id="BlogOne">
+          <div class="blog-header">
+            <input id='update_title' type='text' value="<%= title%>" placeholder='Enter a Title'/>
+            <textarea id='update_content' type='text' value="<%= content %>" placeholder='Enter content'/>
+            <input id='update_tags' type='text' value="<%= tags %>"placeholder='tags'/>
+          </div>
+          <button>Edit It!</button>
+        </form>
+      </li>
     </script>
 
     <script type='text/template' id='usersignin'>
@@ -95,10 +123,12 @@
         <!-- build:js scripts/main.js -->
         <script src="scripts/setup.js"></script>
         <script src="scripts/models/post_model.js"></script>
+        <script src="scripts/models/comments.js"></script>
         <script src="scripts/collections/post_collection.js"></script>
         <script src="scripts/views/add_post_view.js"></script>
         <script src="scripts/views/edit_post_view.js"></script>
         <script src="scripts/views/list_post_view.js"></script>
+        <script src="scripts/views/single_blog.js"></script>
         <script src="scripts/views/user_login_view.js"></script>
         <script src="scripts/views/user_signup_view.js"></script>
         <script src="scripts/routes/app_router.js"></script>

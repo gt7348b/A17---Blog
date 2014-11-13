@@ -4,13 +4,16 @@
   App.Routers.approuter = Parse.Router.extend({
 
     initialize: function () {
-      // Light the Fire
+
+    Parse.history.start();
 
     },
 
     routes: {
       '' : 'home',
       'add' : 'addPost',
+      'edit/:id' : 'editBlog',
+    //  'comment/:id' : 'commentBlog',
     },
 
     home: function(){
@@ -20,12 +23,13 @@
     },
 
     addPost: function(){
-  //    console.log('On-on');
-
       new App.Views.AddPost();
+    },
 
-    }
-
+    editBlog: function(id){
+      var e = App.blog_posts.get(id);
+     new App.Views.SingleBlog({blogs: e});
+    },
 
   });
 

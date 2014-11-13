@@ -10,7 +10,8 @@
       content: '',
       tags: '',
       user: '',
-      submitted: ''
+      submitted: '',
+      comments: '',
     },
 
     idAttribute: 'objectID',

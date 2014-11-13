@@ -16,8 +16,6 @@ Parse.initialize("wF5Pd5fI6w6c5jbKHdEM9qKg3lLaQAw7phwYLnz2", "aKAGgKJ26LBBhqksgQ
 
       App.router = new App.Routers.approuter();
 
-      console.log('on-on');
-      Parse.history.start();
     })
 
     // Log Out

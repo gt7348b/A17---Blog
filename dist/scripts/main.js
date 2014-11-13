@@ -18,7 +18,8 @@
       content: '',
       tags: '',
       user: '',
-      submitted: ''
+      submitted: '',
+      comments: '',
     },
 
     idAttribute: 'objectID',
@@ -27,6 +28,21 @@
       console.log("Lucky?");
 
     }
+
+  });
+
+
+}());
+
+(function () {
+
+  App.Models.Comment = Parse.Object.extend({
+
+    className: 'Comment',
+
+    defaults: {
+      comments: "",
+    },
 
   });
 
@@ -109,7 +125,9 @@ App.Views.ListBlogs = Parse.View.extend ({
   tagName: 'ul',
   className: 'Show',
 
-    events: {},
+    events: {
+      'click #addComment' : 'addComment',
+    },
 
     template: _.template($('#mainblog').html()),
 
@@ -138,11 +156,61 @@ App.Views.ListBlogs = Parse.View.extend ({
       })
 
       return this;
+
   },
 
 
 });
 
+
+}());
+
+(function () {
+
+  App.Views.SingleBlog = Parse.View.extend({
+
+    tagName: 'ul',
+    className: 'BlogSingle',
+
+    events: {
+      'submit #BlogOne' : 'updateBlog',
+    },
+
+    template: _.template($('#singleBlog').html()),
+
+    initialize: function (options) {
+      this.options = options;
+      this.render();
+
+      // Get our Element On Our Page
+      $('#listBlogs').html(this.$el);
+    },
+
+    render: function () {
+      this.$el.empty();
+      this.$el.html(this.template(this.options.blogs.toJSON()));
+
+    },
+
+    updateBlog: function (e) {
+      e.preventDefault();
+
+      // Update our Model Instance
+      this.options.blogs.set({
+        title: $("#update_title").val(),
+        content: $("#update_content").val(),
+        tags: $("#update_tags").val(),
+      });
+
+      // Save Instance
+      this.options.blogs.save();
+
+      // Return to home page
+      App.router.navigate('', {trigger: true});
+
+    },
+
+  });
 
 }());
 
@@ -253,13 +321,16 @@ App.Views.SignUp = Parse.View.extend({
   App.Routers.approuter = Parse.Router.extend({
 
     initialize: function () {
-      // Light the Fire
+
+    Parse.history.start();
 
     },
 
     routes: {
       '' : 'home',
       'add' : 'addPost',
+      'edit/:id' : 'editBlog',
+    //  'comment/:id' : 'commentBlog',
     },
 
     home: function(){
@@ -269,12 +340,13 @@ App.Views.SignUp = Parse.View.extend({
     },
 
     addPost: function(){
-  //    console.log('On-on');
-
       new App.Views.AddPost();
+    },
 
-    }
-
+    editBlog: function(id){
+      var e = App.blog_posts.get(id);
+     new App.Views.SingleBlog({blogs: e});
+    },
 
   });
 
@@ -298,8 +370,6 @@ Parse.initialize("wF5Pd5fI6w6c5jbKHdEM9qKg3lLaQAw7phwYLnz2", "aKAGgKJ26LBBhqksgQ
 
       App.router = new App.Routers.approuter();
 
-      console.log('on-on');
-      Parse.history.start();
     })
 
     // Log Out
