@@ -20,6 +20,7 @@ App.Views.ListBlogs = Parse.View.extend ({
 
     this.collection.off();
     this.collection.on('sync', this.render, this);
+    this.collection.on('destroy', this.render, this);
 
     $('#listBlogs').html(this.$el);
 
@@ -39,6 +40,24 @@ App.Views.ListBlogs = Parse.View.extend ({
       return this;
 
   },
+
+  deleteSong: function(event){
+        event.preventDefault();
+
+        var id = $(event.target).attr('id');
+
+        console.log(id);
+
+        var eliminate = App.blog_posts.get(id);
+
+        console.log(eliminate);
+
+        eliminate.destroy();
+
+        //Return to main page
+        App.router.navigate('', {trigger: true});
+
+      }
 
 
 });
