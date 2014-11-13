@@ -25,7 +25,7 @@
     idAttribute: 'objectID',
 
     initialize: function(){
-      console.log("Lucky?");
+      //console.log("Lucky?");
 
     }
 
@@ -89,7 +89,7 @@
         title: $('#input_title').val(),
         content: $('#blogcontent').val(),
         tags: $('#newtags').val(),
-      //  user: App.user,
+        user: App.user.attributes.username,
         //add time and date stamp
       });
 
@@ -126,8 +126,13 @@ App.Views.ListBlogs = Parse.View.extend ({
   className: 'Show',
 
     events: {
+<<<<<<< HEAD
       'click #addComment' : 'addComment',
     },
+=======
+        'click span': 'deleteSong'
+      },
+>>>>>>> fc81933f714d5857fe2710c9855f240b974599eb
 
     template: _.template($('#mainblog').html()),
 
@@ -139,6 +144,7 @@ App.Views.ListBlogs = Parse.View.extend ({
 
     this.collection.off();
     this.collection.on('sync', this.render, this);
+    this.collection.on('destroy', this.render, this);
 
     $('#listBlogs').html(this.$el);
 
@@ -158,6 +164,24 @@ App.Views.ListBlogs = Parse.View.extend ({
       return this;
 
   },
+
+  deleteSong: function(event){
+        event.preventDefault();
+
+        var id = $(event.target).attr('id');
+
+        console.log(id);
+
+        var eliminate = App.blog_posts.get(id);
+
+        console.log(eliminate);
+
+        eliminate.destroy();
+
+        //Return to main page
+        App.router.navigate('', {trigger: true});
+
+      }
 
 
 });
@@ -224,7 +248,7 @@ App.Views.Login = Parse.View.extend ({
   events: {
 
     "submit #login" : "loginUser",
-
+  //  "submit #logout" : "logoutUser",
   },
 
   template: $("#usersignin").html(),
@@ -249,6 +273,8 @@ App.Views.Login = Parse.View.extend ({
 
     Parse.User.logIn(username, password, {
       success: function(user){
+        App.user = user;
+        console.log(App.user);
         App.updateUser();
         //App.router.navigate('', {trigger:true});
       },
@@ -259,8 +285,18 @@ App.Views.Login = Parse.View.extend ({
 
     });
 
-  }
+    //clear my form
+    $("#login")[0].reset();
+    
+  },
 
+//  logoutUser: function(e) {
+  //  e.preventDefault();
+
+    //Parse.User.logOut();
+    //console.log(App.user);
+
+  //}
 });
 
 }());
@@ -293,22 +329,32 @@ App.Views.SignUp = Parse.View.extend({
 
     var username = $('#newusername').val();
     var password = $('#newpassword').val();
+    var ckpassword = $('#confirmpword').val();
     console.log(username);
     console.log(password);
 
-    var user = new Parse.User();
-      user.set('username', username);
-      user.set('password', password);
+    //Check if passwords match and add new user if true
 
-    user.signUp (null, {
-      success: function(user) {
-      },
-      error: function(user, error){
-        alert("Error Signup");
+    if ( password === ckpassword ){
+
+          var user = new Parse.User();
+          user.set('username', username);
+          user.set('password', password);
+
+        user.signUp (null, {
+          success: function(user) {
+          },
+          error: function(user, error){
+            alert("Error Signup");
+          }
+        });
+      } else {
+          window.alert('Passwords Do Not Match');        
       }
 
-    });
+    //Clear form
 
+    $("#newuser")[0].reset();
   }
 
 });
@@ -364,21 +410,29 @@ Parse.initialize("wF5Pd5fI6w6c5jbKHdEM9qKg3lLaQAw7phwYLnz2", "aKAGgKJ26LBBhqksgQ
 
     App.blog_posts = new App.Collections.Blogposts();
 
-      console.log(App.blog_posts);
+      //console.log(App.blog_posts);
 
       App.blog_posts.fetch().done(function() {
 
       App.router = new App.Routers.approuter();
 
+<<<<<<< HEAD
+=======
+      //console.log('on-on');
+      Parse.history.start();
+>>>>>>> fc81933f714d5857fe2710c9855f240b974599eb
     })
 
     // Log Out
-//  $('#logOut').on('click', function (e) {
-  //  e.preventDefault();
+  //$('#logout').on('click', function (e) {
+    //e.preventDefault();
+
     //Parse.User.logOut();
     //App.updateUser();
+    //console.log(App.user);
+    //console.log('Logged out');
     //App.router.navigate('login', {trigger: true});
-  //});
+    //});
 
   // Update User
   App.updateUser = function (){
