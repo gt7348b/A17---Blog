@@ -10,7 +10,7 @@
     initialize: function(){
       this.render();
 
-      $('.addedPost').html(this.$el);
+      $('#listBlogs').html(this.$el);
 
     },
 

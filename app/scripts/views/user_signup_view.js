@@ -12,7 +12,7 @@ App.Views.SignUp = Parse.View.extend({
   initialize: function() {
     this.render();
 
-    $(".addedPost").html(this.$el);
+    $("#newUser").html(this.$el);
   },
 
 

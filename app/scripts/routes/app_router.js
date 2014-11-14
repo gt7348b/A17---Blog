@@ -28,19 +28,17 @@
     enterSite: function(){
       new App.Views.Login();
       new App.Views.SignUp();
-      $('#entrance').show();
+      //$('.logIn').show();
     },
 
     addPost: function(){
       new App.Views.AddPost();
-      $('.addIt').show();
-      $('#entrance').hide();
+      //$('.logIn').hide();
     },
 
     editBlog: function(id){
       var e = App.blog_posts.get(id);
      new App.Views.EditBlog({blogs: e});
-     $('.addIt').show();
     },
 
     commentBlog: function(id){

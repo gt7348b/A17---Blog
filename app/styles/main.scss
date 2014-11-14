@@ -39,35 +39,26 @@ body {
     line-height: 1;
     letter-spacing: -1px;
   }
-
-/*.login {
+//LogIn/Signup
+.logIn {
   float: left;
   width: 300px;
   background-color: #eee;
   border: 1px solid black;
   border-radius: 6px;
   padding: 60px;
-  h2 {
-    font-size: 30px;
-    line-height: 1;
-    letter-spacing: -1px;
-  }
-} */
-
-.addIt {
-  float: left;
-  width: 300px;
-  background-color: #eee;
-  border: 1px solid black;
-  border-radius: 6px;
-  padding: 60px;
-  h2 {
-    font-size: 30px;
-    line-height: 1;
-    letter-spacing: -1px;
-  }
+}
+//Add Post
+#newpost input {
+  width: 95%;
 }
 
+#newpost textarea {
+  width: 95%;
+  overflow: auto;
+}
+
+//List of All Blogs
 #blogposts {
   float: right;
   width: 800px;
@@ -84,25 +75,44 @@ body {
 
   .blogger {
     list-style: none;
+    margin: 10px auto;
+
+    p {
+      width: 85%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
   }
 
   .blogged {
+    padding-left: 5px;
+    padding-bottom: 10px;
     border: 1px solid black;
+
+    a {
+      text-decoration: none;
+    }
 
     .writer li{
       display: inline-block;
-      //float: left;
       list-style: none;
     }
 
     #updateButton {
       float:right;
     }
-
-    #commentBtn {
-      float:right;
-    }
   }
 }
+//Comment section
+.readIt {
+  list-style: none;
+}
+
+.comment_info textarea {
+  width: 95%;
+}
+
+
 
 }

@@ -16,7 +16,7 @@ App.Views.Login = Parse.View.extend ({
   initialize: function() {
     this.render();
 
-    $('#entrance').html(this.$el);
+    $('#logged').html(this.$el);
   },
 
   render: function() {

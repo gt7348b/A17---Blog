@@ -24,21 +24,9 @@
 
     <div class="container">
 
-  <!--    <div class="login">
-        <h2>Login</h2>
-         <div id="logged">
-           <h2>Login</h2>
-         <span id="loggedIn"></span>
-         </div>
-        <h2>Signup</h2>
-          <div id="signed">
-            <h2>Signup</h2>
-          </div>
-      </div> -->
-
-      <div class="addIt">
-          <div id="entrance"></div>
-          <div class="addedPost"></div>
+      <div class="logIn">
+          <div id="logged"></div>
+          <div id="newUser"></div>
       </div>
 
       <div id='blogposts'>
@@ -48,15 +36,15 @@
 
     <script type='text/template' id='mainblog'>
       <li class="blogger" id="<%= objectId %>">
-        <div class="blogged">
+        <a href="#/comment/<%= objectId %>"><div class="blogged">
             <h4><%= title %> </h4>
             <p><%= content %></p>
             <ul class="writer">
               <li><%= user %></li>
               <li><%= createdAt %></li>
-            </ul>
-            <a href="#/comment/<%= objectId %>"><button id="commentBtn">Add Comment</button></a>
+            </a>
             <a href="#/edit/<%= objectId %>"><button id="updateButton">Edit</button></a>
+            </ul>
         </div>
       </li>
     </script>
@@ -68,15 +56,15 @@
     <script type="text/template" id="ReadTemp">
       <li class="readIt" id="<%= objectId %>">
        <div class="blog_info">
-        <h3><%= title %></h3>
+        <h2><%= title %></h2>
         <p><%= content %></p>
        </div>
         <div class="comment_info">
           <form id="formComment">
               <textarea id="comments" placeholder="Add a Comment"></textarea>
-                <button id="commentPost">Post Comment</button>
-                <a href='#/'><button id="home">Return</button></a>
           </form>
+          <button id="commentPost">Post Comment</button>
+          <a href='#/'><button id="home">Home</button></a>
         </div>
       </li>
     </script>
@@ -96,7 +84,7 @@
     </script>
 
     <script type='text/template' id='usersignin'>
-      <h2>Login</h2>
+      <h3>Login</h3>
       <form id='login'>
         <input id='username' placeholder='Please Enter User Name'/>
         <input id='password' type='password' placeholder='Please Enter Password'/>
@@ -106,7 +94,7 @@
     </script>
 
     <script type='text/template' id='adduser'>
-      <h2>Signup</h2>
+      <h3>Signup</h3>
       <form id='newuser'>
         <input id='newusername' placeholder = 'Enter an User ID'/>
         <input id='newpassword' type='password' placeholder = 'Enter a Password'/>
@@ -117,17 +105,13 @@
     </script>
 
     <script type='text/template' id='addpost'>
-      <h2>Add New Post</h2>
+      <h3>Add New Post</h3>
       <form id='newpost'>
         <input id='input_title' type='text' placeholder='Enter a Title'/>
         <textarea id='blogcontent' type='text' placeholder='Enter content'/>
         <input id='newtags' type='text' placeholder='tags'/>
         <button id="postIt">Post It!</button>
         <button id="draftIt">Save to Draft</button>
-    </script>
-
-    <script type='text/template' id='editpost'>
-
     </script>
 
     <script src="scripts/vendor.js"></script>
