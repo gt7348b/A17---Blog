@@ -38,8 +38,6 @@ App.Views.ListBlogs = Parse.View.extend ({
 
       success: function(results){
 
-        console.log(results);
-
         self.collection.models = results;
 
         self.render();
@@ -52,14 +50,19 @@ App.Views.ListBlogs = Parse.View.extend ({
   render: function(){
 
     var self = this;
-    console.log(this);
 
     //clears our element
     this.$el.empty();
 
       this.collection.each(function (s) {
 
-        self.$el.append(self.template(s.toJSON()));
+        console.log(s);
+
+        if (s.attributes.draft === true){
+
+          self.$el.append(self.template(s.toJSON()));
+        }
+
       })
 
       return this;
