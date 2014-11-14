@@ -4,13 +4,13 @@
   App.Views.AddPost = Parse.View.extend({
 
     events: {
-      'submit #newpost' : 'addpost'
+      'submit #newpost' : 'addpost',
     },
 
     initialize: function(){
       this.render();
 
-      $('.addedPost').html(this.$el);
+      $('#listBlogs').html(this.$el);
 
     },
 
@@ -49,7 +49,8 @@
     //clear my form
     $("#newpost")[0].reset();
 
-    }
+    App.router.navigate('', {trigger: true});
+  },
 
 
   });

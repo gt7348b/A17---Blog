@@ -23,15 +23,15 @@ Parse.initialize("wF5Pd5fI6w6c5jbKHdEM9qKg3lLaQAw7phwYLnz2", "aKAGgKJ26LBBhqksgQ
     })
 
     // Log Out
-  //$('#logout').on('click', function (e) {
-    //e.preventDefault();
+  $('#logOut').on('click', function (e) {
+    e.preventDefault();
 
-    //Parse.User.logOut();
-    //App.updateUser();
-    //console.log(App.user);
-    //console.log('Logged out');
-    //App.router.navigate('login', {trigger: true});
-    //});
+    Parse.User.logOut();
+    App.updateUser();
+    console.log(App.user);
+    console.log('Logged out');
+      App.router.navigate('start', {trigger: true});
+    });
 
   // Update User
   App.updateUser = function (){
@@ -42,12 +42,12 @@ Parse.initialize("wF5Pd5fI6w6c5jbKHdEM9qKg3lLaQAw7phwYLnz2", "aKAGgKJ26LBBhqksgQ
       $('#logOut').text('Log In');
     } else {
       currUsr = 'Welcome ' + App.user.attributes.username;
-      $('#logOut').text('Log In');
+      $('#logOut').text('Log Out');
     }
     $('#loggedIn').html(currUsr);
   };
-  //console.log(App.updateUser);
-  App.updateUser();
+//  console.log(App.updateUser);
+    App.updateUser();
 
 
 }());

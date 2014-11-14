@@ -7,6 +7,7 @@
 
     events: {
       'submit #BlogOne' : 'updateBlog',
+      'click #delete' : 'deleteBlog',
     },
 
     template: _.template($('#singleBlog').html()),
@@ -37,6 +38,17 @@
 
       // Save Instance
       this.options.blogs.save();
+
+      // Return to home page
+      App.router.navigate('', {trigger: true});
+
+    },
+
+      deleteBlog: function (e) {
+      e.preventDefault();
+
+      // Remove Holiday
+      this.options.blogs.destroy();
 
       // Return to home page
       App.router.navigate('', {trigger: true});

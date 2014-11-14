@@ -41,6 +41,13 @@ App.Views.ListBlogs = Parse.View.extend ({
 
   },
 
+  showLogin: function(event){
+        event.preventDefault();
+
+        $('.login').show();
+
+      },
+
   deleteSong: function(event){
         event.preventDefault();
 
