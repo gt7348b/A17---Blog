@@ -26,7 +26,7 @@
       var post = new App.Models.Post({
         title: $('#input_title').val(),
         content: $('#blogcontent').val(),
-        tags: $('#newtags').val(),
+        tags: $('#category').val(),
         user: App.user.attributes.username,
         //add time and date stamp
       });
