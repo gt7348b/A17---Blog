@@ -16,7 +16,7 @@ App.Views.Login = Parse.View.extend ({
   initialize: function() {
     this.render();
 
-    $('#logged').html(this.$el);
+    $('#entrance').html(this.$el);
   },
 
   render: function() {
@@ -47,7 +47,7 @@ App.Views.Login = Parse.View.extend ({
 
     //clear my form
     $("#login")[0].reset();
-    
+
   },
 
 //  logoutUser: function(e) {

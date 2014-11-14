@@ -12,7 +12,7 @@ App.Views.SignUp = Parse.View.extend({
   initialize: function() {
     this.render();
 
-    $("#signed").html(this.$el);
+    $(".addedPost").html(this.$el);
   },
 
 
@@ -46,7 +46,7 @@ App.Views.SignUp = Parse.View.extend({
           }
         });
       } else {
-          window.alert('Passwords Do Not Match');        
+          window.alert('Passwords Do Not Match');
       }
 
     //Clear form

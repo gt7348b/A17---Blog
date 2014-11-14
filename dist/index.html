@@ -15,22 +15,30 @@
   </head>
   <body>
 
-    <div class="container">
+    <div class="header">
       <h1>Blog It All</h1>
+      <a href="#/start"</a><button id="starter">Blog about It</button></a>
+      <a href="#/add" class="addBtn"><button>Add New Post</button></a>
+      <a href="#/" class="homeBtn"><button>Home</button></a>
+    </div>
 
-      <div class="login">
+    <div class="container">
+
+  <!--    <div class="login">
         <h2>Login</h2>
          <div id="logged">
+           <h2>Login</h2>
          <span id="loggedIn"></span>
          </div>
         <h2>Signup</h2>
-          <div id="signed"></div>
-      </div>
+          <div id="signed">
+            <h2>Signup</h2>
+          </div>
+      </div> -->
 
       <div class="addIt">
-        <h2>Add New Post</h2>
+          <div id="entrance"></div>
           <div class="addedPost"></div>
-        <a href="#/add" class="addBtn"><button>Add New Post</button></a>
       </div>
 
       <div id='blogposts'>
@@ -43,6 +51,10 @@
         <div class="blogged">
             <h4><%= title %> </h4>
             <p><%= content %></p>
+            <ul class="writer">
+              <li><%= user %></li>
+              <li><%= createdAt %></li>
+            </ul>
             <a href="#/comment/<%= objectId %>"><button id="commentBtn">Add Comment</button></a>
             <a href="#/edit/<%= objectId %>"><button id="updateButton">Edit</button></a>
         </div>
@@ -84,6 +96,7 @@
     </script>
 
     <script type='text/template' id='usersignin'>
+      <h2>Login</h2>
       <form id='login'>
         <input id='username' placeholder='Please Enter User Name'/>
         <input id='password' type='password' placeholder='Please Enter Password'/>
@@ -93,6 +106,7 @@
     </script>
 
     <script type='text/template' id='adduser'>
+      <h2>Signup</h2>
       <form id='newuser'>
         <input id='newusername' placeholder = 'Enter an User ID'/>
         <input id='newpassword' type='password' placeholder = 'Enter a Password'/>
@@ -103,11 +117,13 @@
     </script>
 
     <script type='text/template' id='addpost'>
+      <h2>Add New Post</h2>
       <form id='newpost'>
         <input id='input_title' type='text' placeholder='Enter a Title'/>
         <textarea id='blogcontent' type='text' placeholder='Enter content'/>
         <input id='newtags' type='text' placeholder='tags'/>
-        <button>Post It!</button>
+        <button id="postIt">Post It!</button>
+        <button id="draftIt">Save to Draft</button>
     </script>
 
     <script type='text/template' id='editpost'>

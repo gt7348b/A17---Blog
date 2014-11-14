@@ -15,6 +15,15 @@ body {
   color: #333;
 }
 
+.header {
+  height: 100px;
+  font-size: 18px;
+  font-weight: 200;
+  line-height: 30px;
+  background-color: #eee;
+  border-radius: 6px;
+}
+
 .container {
 //  margin: 50px auto 0 auto;
   //width: 600px;
@@ -31,7 +40,7 @@ body {
     letter-spacing: -1px;
   }
 
-.login {
+/*.login {
   float: left;
   width: 300px;
   background-color: #eee;
@@ -43,7 +52,7 @@ body {
     line-height: 1;
     letter-spacing: -1px;
   }
-}
+} */
 
 .addIt {
   float: left;
@@ -61,11 +70,12 @@ body {
 
 #blogposts {
   float: right;
-  width: 600px;
+  width: 800px;
   background-color: #eee;
   border: 1px solid black;
   border-radius: 6px;
   padding: 60px;
+  margin-right: 200px;
   h2 {
     font-size: 30px;
     line-height: 1;
@@ -74,6 +84,24 @@ body {
 
   .blogger {
     list-style: none;
+  }
+
+  .blogged {
+    border: 1px solid black;
+
+    .writer li{
+      display: inline-block;
+      //float: left;
+      list-style: none;
+    }
+
+    #updateButton {
+      float:right;
+    }
+
+    #commentBtn {
+      float:right;
+    }
   }
 }
 
