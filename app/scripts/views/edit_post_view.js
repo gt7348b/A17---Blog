@@ -23,7 +23,7 @@
     render: function () {
       this.$el.empty();
       this.$el.html(this.template(this.options.blogs.toJSON()));
-
+      console.log(this);
     },
 
     updateBlog: function (e) {
@@ -33,7 +33,7 @@
       this.options.blogs.set({
         title: $("#update_title").val(),
         content: $("#update_content").val(),
-        tags: $("#update_tags").val(),
+        tags: $("#update_category").val(),
       });
 
       // Save Instance
