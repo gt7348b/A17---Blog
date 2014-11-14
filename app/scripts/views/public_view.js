@@ -33,7 +33,10 @@ App.Views.PublicBlogs = Parse.View.extend ({
     this.$el.empty();
 
       this.collection.each(function (s) {
+          if (s.attributes.draft === false) {
         self.$el.append(self.template(s.toJSON()));
+      }
+
       })
 
       return this;

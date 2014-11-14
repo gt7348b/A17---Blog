@@ -40,8 +40,6 @@ App.Views.ListBlogs = Parse.View.extend ({
 
         console.log(results);
 
-        var current = results;
-
         self.collection.models = results;
 
         self.render();

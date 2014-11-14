@@ -20,8 +20,8 @@
 
     },
 
-    addpost: function(e){
-      e.preventDefault();
+    addpost: function(draft){
+
       console.log("hohoho");
 
       var post = new App.Models.Post({
@@ -55,9 +55,13 @@
 
     draftpost: function(e) {
       e.preventDefault();
-      this.addpost()
-    }
+      this.addpost(true);
+    },
 
+    addpublic: function(e) {
+      e.preventDefault();
+      this.addpost(false);
+    }
 
   });
 
