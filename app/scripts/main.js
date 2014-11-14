@@ -48,13 +48,6 @@ Parse.initialize("wF5Pd5fI6w6c5jbKHdEM9qKg3lLaQAw7phwYLnz2", "aKAGgKJ26LBBhqksgQ
     }
     $('#loggedIn').html(currUsr);
   };
-  //  App.updateUser();
-
-  //Hide buttons/show buttons if logged in
-
-
-
-
-
+    App.updateUser();
 
 }());

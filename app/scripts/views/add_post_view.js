@@ -32,19 +32,20 @@
       });
 
       //Set Control
-      post.setACL(new Parse.ACL(App.user));
+      //post.setACL(new Parse.ACL(App.user));
 
-      var postACL = new Parse.ACL(Parse.User.current());
+      var postACL = new Parse.ACL();
 
       postACL.setPublicReadAccess(true);
+      post.ACL.setWriteAccess(App.user, true);
 
-      console.log(input_title);
+      console.log('Its a dream');
 
       post.save(null, {
       success: function () {
         App.blog_posts.add(post);
       }
-    });
+    }); 
 
     //clear my form
     $("#newpost")[0].reset();
