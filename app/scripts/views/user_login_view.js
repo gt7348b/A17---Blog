@@ -34,9 +34,7 @@ App.Views.Login = Parse.View.extend ({
     Parse.User.logIn(username, password, {
       success: function(user){
         App.user = user;
-        console.log(App.user);
         App.updateUser();
-        //App.router.navigate('', {trigger:true});
       },
 
       error: function(user, error) {

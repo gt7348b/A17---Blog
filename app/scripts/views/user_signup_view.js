@@ -45,6 +45,24 @@ App.Views.SignUp = Parse.View.extend({
             alert("Error Signup");
           }
         });
+
+        console.log("sign up")
+
+        Parse.User.logIn(username, password, {
+          success: function(user){
+            App.user = user;
+            App.updateUser();
+            console.log(App.user);
+          },
+
+          error: function(user, error) {
+            alert("Error");
+          }
+
+        });
+
+        App.router.navigate('', { trigger: true });
+
       } else {
           window.alert('Passwords Do Not Match');
       }
