@@ -66,7 +66,8 @@
   App.Views.AddPost = Parse.View.extend({
 
     events: {
-      'submit #newpost' : 'addpost',
+      'click #postIt' : 'addpublic',
+      'click #draftIt' : 'draftpost',
     },
 
     initialize: function(){
@@ -81,8 +82,8 @@
 
     },
 
-    addpost: function(e){
-      e.preventDefault();
+    addpost: function(draft){
+
       console.log("hohoho");
 
       var post = new App.Models.Post({
@@ -90,6 +91,7 @@
         content: $('#blogcontent').val(),
         tags: $('#category').val(),
         user: App.user.attributes.username,
+        draft: draft,
         //add time and date stamp
       });
 
@@ -113,6 +115,15 @@
     App.router.navigate('', {trigger: true});
   },
 
+    draftpost: function(e) {
+      e.preventDefault();
+      this.addpost(true);
+    },
+
+    addpublic: function(e) {
+      e.preventDefault();
+      this.addpost(false);
+    }
 
   });
 
@@ -179,7 +190,7 @@
 
 }());
 
-
+//this is Draft Views By User
 (function(){
 
 App.Views.ListBlogs = Parse.View.extend ({
@@ -197,37 +208,55 @@ App.Views.ListBlogs = Parse.View.extend ({
 
     this.options = options;
 
-    this.render();
-
     this.collection.off();
     this.collection.on('sync', this.render, this);
     this.collection.on('destroy', this.render, this);
 
+    this.userQuery();
+
     $('#listBlogs').html(this.$el);
+    console.log(this.collection);
+  },
+
+  userQuery: function(){
+
+    var self= this;
+
+    var user_name = new Parse.Query(App.Models.Post);
+
+    user_name.equalTo('user', App.user.attributes.username);
+
+    user_name.find({
+
+      success: function(results){
+
+        console.log(results);
+
+        self.collection.models = results;
+
+        self.render();
+      }
+
+    });
 
   },
 
   render: function(){
 
     var self = this;
+    console.log(this);
 
     //clears our element
     this.$el.empty();
 
       this.collection.each(function (s) {
+
         self.$el.append(self.template(s.toJSON()));
       })
 
       return this;
 
   },
-
-  showLogin: function(event){
-        event.preventDefault();
-
-        $('.login').show();
-
-      },
 
 });
 
@@ -335,7 +364,10 @@ App.Views.PublicBlogs = Parse.View.extend ({
     this.$el.empty();
 
       this.collection.each(function (s) {
+          if (s.attributes.draft === false) {
         self.$el.append(self.template(s.toJSON()));
+      }
+
       })
 
       return this;
@@ -522,7 +554,7 @@ App.Views.SignUp = Parse.View.extend({
       if(App.user) return App.router.navigate('', {trigger: true});
       new App.Views.Login();
       new App.Views.SignUp();
-      new App.Views.ListBlogs({ collection: App.blog_posts});
+      new App.Views.PublicBlogs({ collection: App.blog_posts});
       $('.logIn').show();
     },
 
