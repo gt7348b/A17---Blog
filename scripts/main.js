@@ -210,6 +210,13 @@ App.Views.ListBlogs = Parse.View.extend ({
 
   },
 
+  showLogin: function(event){
+        event.preventDefault();
+
+        $('.login').show();
+
+      },
+
   deleteSong: function(event){
         event.preventDefault();
 
@@ -325,7 +332,7 @@ App.Views.Login = Parse.View.extend ({
   initialize: function() {
     this.render();
 
-    $('#logged').html(this.$el);
+    $('#entrance').html(this.$el);
   },
 
   render: function() {
@@ -356,7 +363,7 @@ App.Views.Login = Parse.View.extend ({
 
     //clear my form
     $("#login")[0].reset();
-    
+
   },
 
 //  logoutUser: function(e) {
@@ -384,7 +391,7 @@ App.Views.SignUp = Parse.View.extend({
   initialize: function() {
     this.render();
 
-    $("#signed").html(this.$el);
+    $(".addedPost").html(this.$el);
   },
 
 
@@ -418,7 +425,7 @@ App.Views.SignUp = Parse.View.extend({
           }
         });
       } else {
-          window.alert('Passwords Do Not Match');        
+          window.alert('Passwords Do Not Match');
       }
 
     //Clear form
@@ -443,24 +450,36 @@ App.Views.SignUp = Parse.View.extend({
 
     routes: {
       '' : 'home',
+      'start': 'enterSite',
       'add' : 'addPost',
       'edit/:id' : 'editBlog',
       'comment/:id' : 'commentBlog'
     },
 
     home: function(){
+    //  new App.Views.Login();
+    //  new App.Views.SignUp();
+      new App.Views.ListBlogs({ collection: App.blog_posts});
+      $('.addIt').hide();
+
+    },
+
+    enterSite: function(){
       new App.Views.Login();
       new App.Views.SignUp();
-      new App.Views.ListBlogs({ collection: App.blog_posts});
+      $('#entrance').show();
     },
 
     addPost: function(){
       new App.Views.AddPost();
+      $('.addIt').show();
+      $('#entrance').hide();
     },
 
     editBlog: function(id){
       var e = App.blog_posts.get(id);
      new App.Views.EditBlog({blogs: e});
+     $('.addIt').show();
     },
 
     commentBlog: function(id){
