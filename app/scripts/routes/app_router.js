@@ -14,7 +14,7 @@
       'start': 'enterSite',
       'add' : 'addPost',
       'edit/:id' : 'editBlog',
-      'comment/:id' : 'commentBlog'
+      'comment/:id' : 'commentBlog',
     },
 
     home: function(){
@@ -22,10 +22,10 @@
     //  new App.Views.SignUp();
       new App.Views.ListBlogs({ collection: App.blog_posts});
       $('.logIn').hide();
-
     },
 
     enterSite: function(){
+      if(App.user) return App.router.navigate('', {trigger: true});
       new App.Views.Login();
       new App.Views.SignUp();
       $('.logIn').show();
@@ -45,6 +45,7 @@
       var c = App.blog_posts.get(id);
      new App.Views.SingleBlog({blogs: c});
     },
+
 
   });
 
