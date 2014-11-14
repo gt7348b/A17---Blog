@@ -1,4 +1,4 @@
-
+//this is Draft Views By User
 (function(){
 
 App.Views.ListBlogs = Parse.View.extend ({
@@ -16,37 +16,57 @@ App.Views.ListBlogs = Parse.View.extend ({
 
     this.options = options;
 
-    this.render();
-
     this.collection.off();
     this.collection.on('sync', this.render, this);
     this.collection.on('destroy', this.render, this);
 
+    this.userQuery();
+
     $('#listBlogs').html(this.$el);
+    console.log(this.collection);
+  },
+
+  userQuery: function(){
+
+    var self= this;
+
+    var user_name = new Parse.Query(App.Models.Post);
+
+    user_name.equalTo('user', App.user.attributes.username);
+
+    user_name.find({
+
+      success: function(results){
+
+        console.log(results);
+
+        var current = results;
+
+        self.collection.models = results;
+
+        self.render();
+      }
+
+    });
 
   },
 
   render: function(){
 
     var self = this;
+    console.log(this);
 
     //clears our element
     this.$el.empty();
 
       this.collection.each(function (s) {
+
         self.$el.append(self.template(s.toJSON()));
       })
 
       return this;
 
   },
-
-  showLogin: function(event){
-        event.preventDefault();
-
-        $('.login').show();
-
-      },
 
 });
 

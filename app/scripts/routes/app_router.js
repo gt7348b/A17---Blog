@@ -27,7 +27,7 @@
       if(App.user) return App.router.navigate('', {trigger: true});
       new App.Views.Login();
       new App.Views.SignUp();
-      new App.Views.ListBlogs({ collection: App.blog_posts});
+      new App.Views.PublicBlogs({ collection: App.blog_posts});
       $('.logIn').show();
     },
 

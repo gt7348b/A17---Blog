@@ -4,7 +4,8 @@
   App.Views.AddPost = Parse.View.extend({
 
     events: {
-      'submit #newpost' : 'addpost',
+      'click #postIt' : 'addpublic',
+      'click #draftIt' : 'draftpost',
     },
 
     initialize: function(){
@@ -28,6 +29,7 @@
         content: $('#blogcontent').val(),
         tags: $('#category').val(),
         user: App.user.attributes.username,
+        draft: draft,
         //add time and date stamp
       });
 
@@ -50,6 +52,11 @@
 
     App.router.navigate('', {trigger: true});
   },
+
+    draftpost: function(e) {
+      e.preventDefault();
+      this.addpost()
+    }
 
 
   });
