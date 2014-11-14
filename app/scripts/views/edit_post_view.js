@@ -8,7 +8,7 @@
     events: {
       'submit #BlogOne' : 'updateBlog',
       'click #delete' : 'deleteBlog',
-      'submit #postDraft' : 'postDraft',
+      'submit #BlogOne' : 'postDraft',
     },
 
     template: _.template($('#singleBlog').html()),
@@ -57,8 +57,22 @@
     },
 
     postDraft: function(e) {
+      e.preventDefault();
 
-      console.log("Getting ready to post");
+      // Update our Model Instance
+      this.options.blogs.set({
+        title: $("#update_title").val(),
+        content: $("#update_content").val(),
+        tags: $("#update_category").val(),
+        draft: false,
+      });
+      
+
+      // Save Instance
+      this.options.blogs.save();
+
+      // Return to home page
+      App.router.navigate('', {trigger: true});
 
     },
 
