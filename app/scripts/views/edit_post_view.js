@@ -8,6 +8,7 @@
     events: {
       'submit #BlogOne' : 'updateBlog',
       'click #delete' : 'deleteBlog',
+      'submit #postDraft' : 'postDraft',
     },
 
     template: _.template($('#singleBlog').html()),
@@ -52,6 +53,12 @@
 
       // Return to home page
       App.router.navigate('', {trigger: true});
+
+    },
+
+    postDraft: function(e) {
+
+      console.log("Getting ready to post");
 
     },
 

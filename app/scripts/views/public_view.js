@@ -16,10 +16,10 @@ App.Views.PublicBlogs = Parse.View.extend ({
 
     this.options = options;
 
-    this.render();
-
     this.collection.off();
     this.collection.on('sync', this.render, this);
+
+    this.render();
 
     $('#listBlogs').html(this.$el);
 
