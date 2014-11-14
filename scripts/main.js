@@ -72,7 +72,7 @@
     initialize: function(){
       this.render();
 
-      $('.addedPost').html(this.$el);
+      $('#listBlogs').html(this.$el);
 
     },
 
@@ -332,7 +332,7 @@ App.Views.Login = Parse.View.extend ({
   initialize: function() {
     this.render();
 
-    $('#entrance').html(this.$el);
+    $('#logged').html(this.$el);
   },
 
   render: function() {
@@ -391,7 +391,7 @@ App.Views.SignUp = Parse.View.extend({
   initialize: function() {
     this.render();
 
-    $(".addedPost").html(this.$el);
+    $("#newUser").html(this.$el);
   },
 
 
@@ -467,19 +467,17 @@ App.Views.SignUp = Parse.View.extend({
     enterSite: function(){
       new App.Views.Login();
       new App.Views.SignUp();
-      $('#entrance').show();
+      //$('.logIn').show();
     },
 
     addPost: function(){
       new App.Views.AddPost();
-      $('.addIt').show();
-      $('#entrance').hide();
+      //$('.logIn').hide();
     },
 
     editBlog: function(id){
       var e = App.blog_posts.get(id);
      new App.Views.EditBlog({blogs: e});
-     $('.addIt').show();
     },
 
     commentBlog: function(id){
