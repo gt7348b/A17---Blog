@@ -88,7 +88,7 @@
       var post = new App.Models.Post({
         title: $('#input_title').val(),
         content: $('#blogcontent').val(),
-        tags: $('#newtags').val(),
+        tags: $('#category').val(),
         user: App.user.attributes.username,
         //add time and date stamp
       });
@@ -144,7 +144,7 @@
     render: function () {
       this.$el.empty();
       this.$el.html(this.template(this.options.blogs.toJSON()));
-
+      console.log(this);
     },
 
     updateBlog: function (e) {
@@ -154,7 +154,7 @@
       this.options.blogs.set({
         title: $("#update_title").val(),
         content: $("#update_content").val(),
-        tags: $("#update_tags").val(),
+        tags: $("#update_category").val(),
       });
 
       // Save Instance
@@ -330,6 +330,60 @@ App.Views.ListBlogs = Parse.View.extend ({
 
 (function(){
 
+App.Views.PublicBlogs = Parse.View.extend ({
+
+  tagName: 'ul',
+  className: 'Public',
+
+    events: {
+
+    },
+
+    template: _.template($('#publicblog').html()),
+
+  initialize: function(options) {
+
+    this.options = options;
+
+    this.render();
+
+    this.collection.off();
+    this.collection.on('sync', this.render, this);
+
+    $('#listBlogs').html(this.$el);
+
+  },
+
+  render: function(){
+
+    var self = this;
+
+    //clears our element
+    this.$el.empty();
+
+      this.collection.each(function (s) {
+        self.$el.append(self.template(s.toJSON()));
+      })
+
+      return this;
+
+  },
+
+  showLogin: function(event){
+        event.preventDefault();
+
+        $('.login').show();
+
+      },
+
+});
+
+
+}());
+
+
+(function(){
+
 App.Views.Login = Parse.View.extend ({
 
   className: "LogIn",
@@ -363,9 +417,7 @@ App.Views.Login = Parse.View.extend ({
     Parse.User.logIn(username, password, {
       success: function(user){
         App.user = user;
-        console.log(App.user);
         App.updateUser();
-        //App.router.navigate('', {trigger:true});
       },
 
       error: function(user, error) {
@@ -376,7 +428,7 @@ App.Views.Login = Parse.View.extend ({
 
     //clear my form
     $("#login")[0].reset();
-
+    App.router.navigate('', { trigger: true });
   },
 
 //  logoutUser: function(e) {
@@ -437,6 +489,24 @@ App.Views.SignUp = Parse.View.extend({
             alert("Error Signup");
           }
         });
+
+        console.log("sign up")
+
+        Parse.User.logIn(username, password, {
+          success: function(user){
+            App.user = user;
+            App.updateUser();
+            console.log(App.user);
+          },
+
+          error: function(user, error) {
+            alert("Error");
+          }
+
+        });
+
+        App.router.navigate('', { trigger: true });
+
       } else {
           window.alert('Passwords Do Not Match');
       }
@@ -466,13 +536,12 @@ App.Views.SignUp = Parse.View.extend({
       'start': 'enterSite',
       'add' : 'addPost',
       'edit/:id' : 'editBlog',
+      'draft' : 'showdrafts',
       'comment/:id' : 'commentBlog',
     },
 
     home: function(){
-    //  new App.Views.Login();
-    //  new App.Views.SignUp();
-      new App.Views.ListBlogs({ collection: App.blog_posts});
+      new App.Views.PublicBlogs({ collection: App.blog_posts});
       $('.logIn').hide();
     },
 
@@ -480,7 +549,13 @@ App.Views.SignUp = Parse.View.extend({
       if(App.user) return App.router.navigate('', {trigger: true});
       new App.Views.Login();
       new App.Views.SignUp();
+      new App.Views.ListBlogs({ collection: App.blog_posts});
       $('.logIn').show();
+    },
+
+    showdrafts: function(){
+      new App.Views.ListBlogs({ collection: App.blog_posts});
+      $('.logIn').hide();
     },
 
     addPost: function(){
@@ -533,8 +608,6 @@ Parse.initialize("wF5Pd5fI6w6c5jbKHdEM9qKg3lLaQAw7phwYLnz2", "aKAGgKJ26LBBhqksgQ
 
     Parse.User.logOut();
     App.updateUser();
-    console.log(App.user);
-    console.log('Logged out');
       App.router.navigate('start', {trigger: true});
     });
 
@@ -545,14 +618,23 @@ Parse.initialize("wF5Pd5fI6w6c5jbKHdEM9qKg3lLaQAw7phwYLnz2", "aKAGgKJ26LBBhqksgQ
     if (App.user == null){
       currUsr = '';
       $('#logOut').text('Log In');
+      $('.addBtn').hide();
+      $('.draftBtn').hide();
     } else {
       currUsr = 'Welcome ' + App.user.attributes.username;
       $('#logOut').text('Log Out');
+      $('.addBtn').show();
+      $('.draftBtn').show();
     }
     $('#loggedIn').html(currUsr);
   };
-//  console.log(App.updateUser);
-    App.updateUser();
+  //  App.updateUser();
+
+  //Hide buttons/show buttons if logged in
+
+
+
+
 
 
 }());
