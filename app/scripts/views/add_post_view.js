@@ -32,12 +32,10 @@
       });
 
       //Set Control
-      //post.setACL(new Parse.ACL(App.user));
-
       var postACL = new Parse.ACL();
 
       postACL.setPublicReadAccess(true);
-      post.ACL.setWriteAccess(App.user, true);
+      postACL.setWriteAccess(App.user, true);
 
       console.log('Its a dream');
 
@@ -45,7 +43,7 @@
       success: function () {
         App.blog_posts.add(post);
       }
-    }); 
+    });
 
     //clear my form
     $("#newpost")[0].reset();

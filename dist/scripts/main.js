@@ -94,12 +94,10 @@
       });
 
       //Set Control
-      //post.setACL(new Parse.ACL(App.user));
-
       var postACL = new Parse.ACL();
 
       postACL.setPublicReadAccess(true);
-      post.ACL.setWriteAccess(App.user, true);
+      postACL.setWriteAccess(App.user, true);
 
       console.log('Its a dream');
 
@@ -107,7 +105,7 @@
       success: function () {
         App.blog_posts.add(post);
       }
-    }); 
+    });
 
     //clear my form
     $("#newpost")[0].reset();
@@ -231,25 +229,6 @@ App.Views.ListBlogs = Parse.View.extend ({
 
       },
 
-  deleteSong: function(event){
-        event.preventDefault();
-
-        var id = $(event.target).attr('id');
-
-        console.log(id);
-
-        var eliminate = App.blog_posts.get(id);
-
-        console.log(eliminate);
-
-        eliminate.destroy();
-
-        //Return to main page
-        App.router.navigate('', {trigger: true});
-
-      }
-
-
 });
 
 
@@ -264,7 +243,6 @@ App.Views.ListBlogs = Parse.View.extend ({
 
     events: {
       'submit #formComment' : 'commentBlog',
-      'click #home' : 'returnMain',
     },
 
     template: _.template($('#ReadTemp').html()),
@@ -279,7 +257,6 @@ App.Views.ListBlogs = Parse.View.extend ({
 
     render: function () {
       this.$el.empty();
-      console.log(this);
       this.$el.html(this.template(this.options.blogs.toJSON()));
 
       var commentTemplate = _.template($('#CommentTemp').html());
@@ -291,7 +268,6 @@ App.Views.ListBlogs = Parse.View.extend ({
 
       comment_query.find({
         success: function (results) {
-          console.log(results);
           _.each(results, function(comment) {
             $('ul.commented').append(commentTemplate(comment.toJSON()));
           })
@@ -309,20 +285,16 @@ App.Views.ListBlogs = Parse.View.extend ({
         parent: this.options.blogs
 
       });
+      console.log("tralalala");
 
       commented.save(null, {
         success: function () {
           console.log('Comment has been added');
-        //  App.router.navigate('', {trigger: true});
+
         }
      });
 
     },
-
-    returnMain: function(e){
-      App.router.navigate('', {trigger: true});
-    },
-
 
   });
 
@@ -567,11 +539,13 @@ App.Views.SignUp = Parse.View.extend({
     editBlog: function(id){
       var e = App.blog_posts.get(id);
      new App.Views.EditBlog({blogs: e});
+     $('.logIn').hide();
     },
 
     commentBlog: function(id){
       var c = App.blog_posts.get(id);
-     new App.Views.SingleBlog({blogs: c});
+      new App.Views.SingleBlog({blogs: c});
+      $('.logIn').hide();
     },
 
 

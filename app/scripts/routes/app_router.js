@@ -44,11 +44,13 @@
     editBlog: function(id){
       var e = App.blog_posts.get(id);
      new App.Views.EditBlog({blogs: e});
+     $('.logIn').hide();
     },
 
     commentBlog: function(id){
       var c = App.blog_posts.get(id);
-     new App.Views.SingleBlog({blogs: c});
+      new App.Views.SingleBlog({blogs: c});
+      $('.logIn').hide();
     },
 
 

@@ -48,25 +48,6 @@ App.Views.ListBlogs = Parse.View.extend ({
 
       },
 
-  deleteSong: function(event){
-        event.preventDefault();
-
-        var id = $(event.target).attr('id');
-
-        console.log(id);
-
-        var eliminate = App.blog_posts.get(id);
-
-        console.log(eliminate);
-
-        eliminate.destroy();
-
-        //Return to main page
-        App.router.navigate('', {trigger: true});
-
-      }
-
-
 });
 
 

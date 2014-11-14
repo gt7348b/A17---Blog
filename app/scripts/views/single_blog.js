@@ -7,7 +7,6 @@
 
     events: {
       'submit #formComment' : 'commentBlog',
-      'click #home' : 'returnMain',
     },
 
     template: _.template($('#ReadTemp').html()),
@@ -22,7 +21,6 @@
 
     render: function () {
       this.$el.empty();
-      console.log(this);
       this.$el.html(this.template(this.options.blogs.toJSON()));
 
       var commentTemplate = _.template($('#CommentTemp').html());
@@ -34,7 +32,6 @@
 
       comment_query.find({
         success: function (results) {
-          console.log(results);
           _.each(results, function(comment) {
             $('ul.commented').append(commentTemplate(comment.toJSON()));
           })
@@ -52,20 +49,16 @@
         parent: this.options.blogs
 
       });
+      console.log("tralalala");
 
       commented.save(null, {
         success: function () {
           console.log('Comment has been added');
-        //  App.router.navigate('', {trigger: true});
+
         }
      });
 
     },
-
-    returnMain: function(e){
-      App.router.navigate('', {trigger: true});
-    },
-
 
   });
 
