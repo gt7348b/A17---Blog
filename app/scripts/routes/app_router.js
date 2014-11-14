@@ -21,19 +21,19 @@
     //  new App.Views.Login();
     //  new App.Views.SignUp();
       new App.Views.ListBlogs({ collection: App.blog_posts});
-      $('.addIt').hide();
+      $('.logIn').hide();
 
     },
 
     enterSite: function(){
       new App.Views.Login();
       new App.Views.SignUp();
-      //$('.logIn').show();
+      $('.logIn').show();
     },
 
     addPost: function(){
       new App.Views.AddPost();
-      //$('.logIn').hide();
+      $('.logIn').hide();
     },
 
     editBlog: function(id){

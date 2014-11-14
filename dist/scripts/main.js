@@ -66,7 +66,7 @@
   App.Views.AddPost = Parse.View.extend({
 
     events: {
-      'submit #newpost' : 'addpost'
+      'submit #newpost' : 'addpost',
     },
 
     initialize: function(){
@@ -111,7 +111,8 @@
     //clear my form
     $("#newpost")[0].reset();
 
-    }
+    App.router.navigate('', {trigger: true});
+  },
 
 
   });
@@ -127,6 +128,7 @@
 
     events: {
       'submit #BlogOne' : 'updateBlog',
+      'click #delete' : 'deleteBlog',
     },
 
     template: _.template($('#singleBlog').html()),
@@ -157,6 +159,17 @@
 
       // Save Instance
       this.options.blogs.save();
+
+      // Return to home page
+      App.router.navigate('', {trigger: true});
+
+    },
+
+      deleteBlog: function (e) {
+      e.preventDefault();
+
+      // Remove Holiday
+      this.options.blogs.destroy();
 
       // Return to home page
       App.router.navigate('', {trigger: true});
@@ -460,19 +473,19 @@ App.Views.SignUp = Parse.View.extend({
     //  new App.Views.Login();
     //  new App.Views.SignUp();
       new App.Views.ListBlogs({ collection: App.blog_posts});
-      $('.addIt').hide();
+      $('.logIn').hide();
 
     },
 
     enterSite: function(){
       new App.Views.Login();
       new App.Views.SignUp();
-      //$('.logIn').show();
+      $('.logIn').show();
     },
 
     addPost: function(){
       new App.Views.AddPost();
-      //$('.logIn').hide();
+      $('.logIn').hide();
     },
 
     editBlog: function(id){
