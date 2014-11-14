@@ -14,13 +14,12 @@
       'start': 'enterSite',
       'add' : 'addPost',
       'edit/:id' : 'editBlog',
+      'draft' : 'showdrafts',
       'comment/:id' : 'commentBlog',
     },
 
     home: function(){
-    //  new App.Views.Login();
-    //  new App.Views.SignUp();
-      new App.Views.ListBlogs({ collection: App.blog_posts});
+      new App.Views.PublicBlogs({ collection: App.blog_posts});
       $('.logIn').hide();
     },
 
@@ -28,7 +27,13 @@
       if(App.user) return App.router.navigate('', {trigger: true});
       new App.Views.Login();
       new App.Views.SignUp();
+      new App.Views.ListBlogs({ collection: App.blog_posts});
       $('.logIn').show();
+    },
+
+    showdrafts: function(){
+      new App.Views.ListBlogs({ collection: App.blog_posts});
+      $('.logIn').hide();
     },
 
     addPost: function(){

@@ -28,8 +28,6 @@ Parse.initialize("wF5Pd5fI6w6c5jbKHdEM9qKg3lLaQAw7phwYLnz2", "aKAGgKJ26LBBhqksgQ
 
     Parse.User.logOut();
     App.updateUser();
-    console.log(App.user);
-    console.log('Logged out');
       App.router.navigate('start', {trigger: true});
     });
 
@@ -40,14 +38,23 @@ Parse.initialize("wF5Pd5fI6w6c5jbKHdEM9qKg3lLaQAw7phwYLnz2", "aKAGgKJ26LBBhqksgQ
     if (App.user == null){
       currUsr = '';
       $('#logOut').text('Log In');
+      $('.addBtn').hide();
+      $('.draftBtn').hide();
     } else {
       currUsr = 'Welcome ' + App.user.attributes.username;
       $('#logOut').text('Log Out');
+      $('.addBtn').show();
+      $('.draftBtn').show();
     }
     $('#loggedIn').html(currUsr);
   };
-//  console.log(App.updateUser);
-    App.updateUser();
+  //  App.updateUser();
+
+  //Hide buttons/show buttons if logged in
+
+
+
+
 
 
 }());

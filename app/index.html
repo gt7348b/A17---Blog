@@ -27,6 +27,7 @@
       <h1>Blog It All</h1>
       <a href="#/start"</a><button id="logOut">Logout</button></a>
       <a href="#/add" class="addBtn"><button>Add New Post</button></a>
+      <a href="#/draft" class="draftBtn"><button>Drafts</button></a>
       <a href="#/" class="homeBtn"><button>Home</button></a>
       <span id="loggedIn"></span>
     </div>
@@ -43,6 +44,7 @@
       </div>
 
     <script type='text/template' id='mainblog'>
+      <h4>Draft</h4>
       <li class="blogger" id="<%= objectId %>">
         <a href="#/comment/<%= objectId %>"><div class="blogged">
             <h4><%= title %> </h4>
@@ -50,8 +52,25 @@
             <ul class="writer">
               <li><%= user %></li>
               <li><%= createdAt %></li>
+              <li><%= tags %></li>
             </a>
             <a href="#/edit/<%= objectId %>"><button id="updateButton">Edit</button></a>
+            </ul>
+        </div>
+      </li>
+    </script>
+
+    <script type='text/template' id='publicblog'>
+      <h4>Public</h4>
+      <li class="publicView" id="<%= objectId %>">
+        <a href="#/comment/<%= objectId %>"><div class="publicComment">
+            <h4><%= title %> </h4>
+            <p><%= content %></p>
+            <ul class="publicWrite">
+              <li><%= user %></li>
+              <li><%= createdAt %></li>
+              <li><%= tags %></li>
+            </a>
             </ul>
         </div>
       </li>
@@ -160,6 +179,7 @@
         <script src="scripts/views/edit_post_view.js"></script>
         <script src="scripts/views/list_post_view.js"></script>
         <script src="scripts/views/single_blog.js"></script>
+        <script src="scripts/views/public_view.js"></script>
         <script src="scripts/views/user_login_view.js"></script>
         <script src="scripts/views/user_signup_view.js"></script>
         <script src="scripts/routes/app_router.js"></script>
