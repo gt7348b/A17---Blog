@@ -10,9 +10,11 @@
 
 // Custom Styles
 body {
-  background: #fafafa;
+  background: url('../styles/images/Rust-turquoiseblue.jpg')no-repeat center center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  color: #333;
 }
 
 .header {
@@ -22,6 +24,7 @@ body {
   line-height: 30px;
   background-color: #eee;
   border-radius: 6px;
+  margin-bottom: 70px;
 }
 
 .container {
@@ -31,7 +34,6 @@ body {
   font-size: 18px;
   font-weight: 200;
   line-height: 30px;
-  background-color: #eee;
   border-radius: 6px;
   //padding: 60px;
   h1 {
@@ -67,6 +69,7 @@ body {
   border-radius: 6px;
   padding: 60px;
   margin-right: 200px;
+
   h2 {
     font-size: 30px;
     line-height: 1;
@@ -102,6 +105,19 @@ body {
     #updateButton {
       float:right;
     }
+  }
+}
+//Edit Post
+.soloBlog {
+  list-style: none;
+
+  #BlogOne input {
+    width: 95%;
+  }
+
+  #BlogOne textarea {
+    width: 95%;
+    overflow: auto;
   }
 }
 //Comment section
