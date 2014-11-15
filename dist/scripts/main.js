@@ -7,7 +7,7 @@
           App.Routers = {};
 
 
-(function(){
+$( document ).ready(function(){
 
   App.Models.Post = Parse.Object.extend({
 
@@ -61,7 +61,7 @@
 }());
 
 
-(function(){
+$( document ).ready(function(){
 
   App.Views.AddPost = Parse.View.extend({
 
@@ -191,7 +191,9 @@
 }());
 
 //this is Draft Views By User
-(function(){
+
+
+$( document ).ready(function(){
 
 App.Views.ListBlogs = Parse.View.extend ({
 
@@ -199,7 +201,7 @@ App.Views.ListBlogs = Parse.View.extend ({
   className: 'Show',
 
     events: {
-
+      'click #poster' : 'makePublic',
     },
 
     template: _.template($('#mainblog').html()),
@@ -244,26 +246,30 @@ App.Views.ListBlogs = Parse.View.extend ({
   render: function(){
 
     var self = this;
-    console.log(this);
 
     //clears our element
     this.$el.empty();
 
       this.collection.each(function (s) {
-
+          if (s.attributes.draft === true) {
         self.$el.append(self.template(s.toJSON()));
+        }
+
       })
 
       return this;
+    },
 
-  },
+  makePublic: function () {
+
+    
+  }
 
 });
 
-
 }());
 
-(function () {
+$( document ).ready(function () {
 
   App.Views.SingleBlog = Parse.View.extend({
 
@@ -314,11 +320,9 @@ App.Views.ListBlogs = Parse.View.extend ({
         parent: this.options.blogs
 
       });
-      console.log("tralalala");
 
       commented.save(null, {
         success: function () {
-          console.log('Comment has been added');
 
         }
      });
@@ -387,7 +391,7 @@ App.Views.PublicBlogs = Parse.View.extend ({
 }());
 
 
-(function(){
+$( document ).ready(function(){
 
 App.Views.Login = Parse.View.extend ({
 
@@ -526,7 +530,7 @@ App.Views.SignUp = Parse.View.extend({
 }());
 
 
-(function(){
+$( document ).ready(function(){
 
   App.Routers.approuter = Parse.Router.extend({
 
@@ -591,7 +595,7 @@ Parse.initialize("wF5Pd5fI6w6c5jbKHdEM9qKg3lLaQAw7phwYLnz2", "aKAGgKJ26LBBhqksgQ
 
 //Work
 
-(function(){
+$( document ).ready(function(){
 
     //Create blog posts
 

@@ -1,5 +1,5 @@
 
-(function(){
+$( document ).ready(function(){
 
 App.Views.Login = Parse.View.extend ({
 

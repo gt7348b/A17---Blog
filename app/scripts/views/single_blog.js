@@ -1,4 +1,4 @@
-(function () {
+$( document ).ready(function () {
 
   App.Views.SingleBlog = Parse.View.extend({
 
@@ -49,11 +49,9 @@
         parent: this.options.blogs
 
       });
-      console.log("tralalala");
 
       commented.save(null, {
         success: function () {
-          console.log('Comment has been added');
 
         }
      });

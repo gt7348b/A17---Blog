@@ -1,5 +1,7 @@
 //this is Draft Views By User
-(function(){
+
+
+$( document ).ready(function(){
 
 App.Views.ListBlogs = Parse.View.extend ({
 
@@ -7,7 +9,7 @@ App.Views.ListBlogs = Parse.View.extend ({
   className: 'Show',
 
     events: {
-
+      'click #poster' : 'makePublic',
     },
 
     template: _.template($('#mainblog').html()),
@@ -52,21 +54,25 @@ App.Views.ListBlogs = Parse.View.extend ({
   render: function(){
 
     var self = this;
-    console.log(this);
 
     //clears our element
     this.$el.empty();
 
       this.collection.each(function (s) {
-
+          if (s.attributes.draft === true) {
         self.$el.append(self.template(s.toJSON()));
+        }
+
       })
 
       return this;
+    },
 
-  },
+  makePublic: function () {
+
+    
+  }
 
 });
-
 
 }());

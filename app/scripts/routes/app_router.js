@@ -1,5 +1,5 @@
 
-(function(){
+$( document ).ready(function(){
 
   App.Routers.approuter = Parse.Router.extend({
 

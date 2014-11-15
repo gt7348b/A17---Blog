@@ -1,5 +1,5 @@
 
-(function(){
+$( document ).ready(function(){
 
   App.Models.Post = Parse.Object.extend({
 
