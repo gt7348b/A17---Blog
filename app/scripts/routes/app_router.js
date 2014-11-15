@@ -16,6 +16,7 @@
       'edit/:id' : 'editBlog',
       'draft' : 'showdrafts',
       'comment/:id' : 'commentBlog',
+      'author/:user' : 'authorBlog',
     },
 
     home: function(){
@@ -52,6 +53,15 @@
       new App.Views.SingleBlog({blogs: c});
       $('.logIn').hide();
     },
+
+    authorBlog: function(user){
+      console.log(user);
+      console.log(App.blog_posts);
+        var c = App.blog_posts.get(user);
+      console.log(c);
+      new App.Views.AuthorPost({collection: c});
+      $('.logIn').hide();
+    }
 
 
   });
