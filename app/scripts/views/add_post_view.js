@@ -50,17 +50,18 @@ $( document ).ready(function(){
     //clear my form
     $("#newpost")[0].reset();
 
-    App.router.navigate('', {trigger: true});
   },
 
     draftpost: function(e) {
       e.preventDefault();
       this.addpost(true);
+      App.router.navigate('draft', {trigger: true});
     },
 
     addpublic: function(e) {
       e.preventDefault();
       this.addpost(false);
+      App.router.navigate('', {trigger: true});
     }
 
   });

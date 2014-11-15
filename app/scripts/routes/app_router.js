@@ -41,6 +41,13 @@ $( document ).ready(function(){
     addPost: function(){
       new App.Views.AddPost();
       $('.logIn').hide();
+      $('#postIt').click(function() {
+        location.reload();
+      });
+      $('#draftIt').click(function() {
+        location.reload();
+      });
+
     },
 
     editBlog: function(id){
@@ -53,6 +60,9 @@ $( document ).ready(function(){
       var c = App.blog_posts.get(id);
       new App.Views.SingleBlog({blogs: c});
       $('.logIn').hide();
+      $('#commentPost').click(function() {
+        location.reload();
+      });
     },
 
 

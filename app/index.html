@@ -58,6 +58,7 @@
             <ul class="writer">
               <li><%= user %></li>
               <li><%= moment(createdAt).format("MMMM Do, YYYY") %></li>
+              <!-- <li><%= moment(createdAt).format("MMMM Do, YYYY") %></li> -->
               <li><%= tags %></li>
             </a>
             <a href="#/edit/<%= objectId %>"><button id="updateButton">Edit</button></a>
@@ -75,7 +76,8 @@
             <p><%= content %></p>
             <ul class="publicWrite">
               <li><%= user %></li>
-              <li><%= createdAt %></li>
+            <!--  <li><%= moment(createdAt).format("MMMM Do, YYYY") %></li> -->
+              <li><%= moment(createdAt).format("MMMM Do, YYYY") %></li>
               <li><%= tags %></li>
             </a>
             <a href="#/edit/<%= objectId %>"><button id="updatePublic">Edit</button></a>
@@ -172,6 +174,7 @@
     <!-- bower:js -->
     <script src="../bower_components/jquery/dist/jquery.js"></script>
     <script src="../bower_components/underscore/underscore.js"></script>
+    <script src="../bower_components/moment/moment.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 

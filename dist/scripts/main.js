@@ -20,7 +20,6 @@ $( document ).ready(function(){
       user: '',
       submitted: '',
       comments: '',
-      createdAt: '',
     },
 
     idAttribute: 'objectID',
@@ -56,7 +55,7 @@ $( document ).ready(function(){
 
     model: App.Models.Post,
     comparator: function (model) {
-    return (model.get('date'));
+    return (model.get('createdAt'));
   },
 
   });
@@ -115,17 +114,18 @@ $( document ).ready(function(){
     //clear my form
     $("#newpost")[0].reset();
 
-    App.router.navigate('', {trigger: true});
   },
 
     draftpost: function(e) {
       e.preventDefault();
       this.addpost(true);
+      App.router.navigate('draft', {trigger: true});
     },
 
     addpublic: function(e) {
       e.preventDefault();
       this.addpost(false);
+      App.router.navigate('', {trigger: true});
     }
 
   });
@@ -604,6 +604,13 @@ $( document ).ready(function(){
     addPost: function(){
       new App.Views.AddPost();
       $('.logIn').hide();
+      $('#postIt').click(function() {
+        location.reload();
+      });
+      $('#draftIt').click(function() {
+        location.reload();
+      });
+
     },
 
     editBlog: function(id){
@@ -616,6 +623,9 @@ $( document ).ready(function(){
       var c = App.blog_posts.get(id);
       new App.Views.SingleBlog({blogs: c});
       $('.logIn').hide();
+      $('#commentPost').click(function() {
+        location.reload();
+      });
     },
 
 

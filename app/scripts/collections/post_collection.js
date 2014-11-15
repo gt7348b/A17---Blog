@@ -4,7 +4,7 @@
 
     model: App.Models.Post,
     comparator: function (model) {
-    return (model.get('date'));
+    return (model.get('createdAt'));
   },
 
   });
