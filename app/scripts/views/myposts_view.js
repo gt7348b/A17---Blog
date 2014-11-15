@@ -1,16 +1,16 @@
 
 (function(){
 
-App.Views.PublicBlogs = Parse.View.extend ({
+App.Views.MyBlogs = Parse.View.extend ({
 
   tagName: 'ul',
-  className: 'Public',
+  className: 'myPost',
 
     events: {
 
     },
 
-    template: _.template($('#publicblog').html()),
+    template: _.template($('#myposts').html()),
 
   initialize: function(options) {
 
@@ -19,9 +19,30 @@ App.Views.PublicBlogs = Parse.View.extend ({
     this.collection.off();
     this.collection.on('sync', this.render, this);
 
-    this.render();
+    this.userQuery();
 
     $('#listBlogs').html(this.$el);
+
+  },
+
+  userQuery: function(){
+
+    var self= this;
+
+    var user_name = new Parse.Query(App.Models.Post);
+
+    user_name.equalTo('user', App.user.attributes.username);
+
+    user_name.find({
+
+      success: function(results){
+
+        self.collection.models = results;
+
+        self.render();
+      }
+
+    });
 
   },
 

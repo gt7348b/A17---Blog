@@ -18,6 +18,7 @@ $( document ).ready(function(){
       'comment/:id' : 'commentBlog',
       'author/:user' : 'authorBlog',
       'category/:tags' : 'tagBlog',
+      'myposts' : 'mypostEdit',
 
     },
 
@@ -83,7 +84,7 @@ $( document ).ready(function(){
           $('.logIn').hide();
         }
       });
-    }, 
+    },
 
     tagBlog: function(tags){
       console.log('hi');
@@ -109,6 +110,11 @@ $( document ).ready(function(){
       });
 
     },
+
+    mypostEdit: function() {
+      new App.Views.MyBlogs({ collection: App.blog_posts});
+      $('.logIn').hide();
+    }
 
   });
 

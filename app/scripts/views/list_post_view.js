@@ -64,34 +64,8 @@ App.Views.ListBlogs = Parse.View.extend ({
 
       });
 
-  /*       // Sorting On The Fly
-    if (this.options.sort != undefined) {
-      // Setting up a localized collection to sort by our sort param
-      var list_collection = this.collection.sortBy( function (model) {
-        return model.get(self.options.sort);
-      });
-      _.each(list_collection, function (s) {
-         if (s.attributes.draft === true) {
-        self.$el.append(self.template(s.toJSON()));
-       }
-      })
-    } else {
-      // Sort from our default
-      this.collection.sort();
-      this.collection.each(function (s) {
-        if (s.attributes.draft === true) {
-        self.$el.append(self.template(s.toJSON()));
-        }
-
-      });
-    }*/
       return this;
     },
-
-  makePublic: function () {
-
-
-  }
 
 });
 

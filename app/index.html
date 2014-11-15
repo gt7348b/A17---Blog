@@ -27,6 +27,7 @@
       <h1>Blog It All</h1>
       <a href="#/start"</a><button id="logOut">Logout</button></a>
       <a href="#/add" class="addBtn"><button>Add New Post</button></a>
+      <a href="#/myposts"><button id="edit_myposts">Edit My Posts</button></a>
       <a href="#/draft" class="draftBtn"><button>Drafts</button></a>
       <a href="#/" class="homeBtn"><button>Home</button></a>
       <span id="loggedIn"></span>
@@ -40,12 +41,6 @@
       </div>
 
       <div id='blogposts'>
-        <div class="sorts">
-          <a href="#/sort/createdAt">Date</a> &bull;
-          <a href="#/sort/user">Author</a> &bull;
-          <a href="#/sort/title">Title</a> &bull;
-          <a href="#/sort/tags">Tags</a>
-        </div>
         <div id="listBlogs"></div>
       </div>
 
@@ -74,15 +69,30 @@
             <h4><%= title %> </h4>
             <p><%= content %></p>
           </div></a>
-
             <ul class="publicWrite">
               <a href='#/author/<%= user %>'><li><%= user %></li></a>
              <li><%= moment(createdAt).format("MMMM Do, YYYY") %></li>
               <a href='#/category/<%= tags %>'><li><%= tags %></li></a>
             </a>
-            <a href="#/edit/<%= objectId %>"><button id="updatePublic">Edit</button></a>
             </ul>
+        </div>
+      </li>
+    </script>
 
+    <script type='text/template' id='myposts'>
+      <h4>My Posts</h4>
+      <li class="mypostview" id="<%= objectId %>">
+        <div class="postRead">
+            <div>
+            <h4><%= title %> </h4>
+            <p><%= content %></p>
+          </div>
+            <ul class="postWrite">
+              <a href='#/author/<%= user %>'><li><%= user %></li></a>
+             <li><%= moment(createdAt).format("MMMM Do, YYYY") %></li>
+              <a href='#/category/<%= tags %>'><li><%= tags %></li></a>
+              <a href="#/edit/<%= objectId %>"><button id="editMine">Edit</button></a>
+            </ul>
         </div>
       </li>
     </script>
@@ -196,6 +206,7 @@
         <script src="scripts/views/public_view.js"></script>
         <script src="scripts/views/user_login_view.js"></script>
         <script src="scripts/views/user_signup_view.js"></script>
+        <script src="scripts/views/myposts_view.js"></script>
         <script src="scripts/routes/app_router.js"></script>
         <script src="scripts/main.js"></script>
         <!-- endbuild -->
