@@ -78,7 +78,7 @@
             <ul class="publicWrite">
               <a href='#/author/<%= user %>'><li><%= user %></li></a>
              <li><%= moment(createdAt).format("MMMM Do, YYYY") %></li>
-              <li><%= tags %></li>
+              <a href='#/category/<%= tags %>'><li><%= tags %></li></a>
             </a>
             <a href="#/edit/<%= objectId %>"><button id="updatePublic">Edit</button></a>
             </ul>
@@ -191,6 +191,7 @@
         <script src="scripts/views/edit_post_view.js"></script>
         <script src="scripts/views/list_post_view.js"></script>
         <script src="scripts/views/author_post_view.js"></script>
+        <script src="scripts/views/category_view.js"></script>
         <script src="scripts/views/single_blog.js"></script>
         <script src="scripts/views/public_view.js"></script>
         <script src="scripts/views/user_login_view.js"></script>

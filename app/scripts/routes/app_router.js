@@ -16,9 +16,8 @@ $( document ).ready(function(){
       'edit/:id' : 'editBlog',
       'draft' : 'showdrafts',
       'comment/:id' : 'commentBlog',
-    //  'sort/:sortby' : 'home',
-    //  'sort/:sortby' : 'showdrafts',
       'author/:user' : 'authorBlog',
+      'category/:tags' : 'tagBlog',
 
     },
 
@@ -68,8 +67,6 @@ $( document ).ready(function(){
     },
 
     authorBlog: function(user){
-      console.log(user);
-      console.log(App.blog_posts);
 
       var author = new Parse.Query(App.Models.Post),
           c;
@@ -86,10 +83,32 @@ $( document ).ready(function(){
           $('.logIn').hide();
         }
       });
+    }, 
 
+    tagBlog: function(tags){
+      console.log('hi');
+      console.log(tags);
+      console.log(App.blog_posts);
 
-    }
+      var category = new Parse.Query(App.Models.Post),
+        c;
 
+      category.equalTo('tags', tags);
+
+      category.find({
+
+        success: function(results){
+
+          c = results;
+
+          new App.Views.CategoryPost({collection: c});
+          $('.logIn').hide();
+
+        }
+
+      });
+
+    },
 
   });
 

@@ -16,9 +16,6 @@ App.Views.AuthorPost = Parse.View.extend ({
 
     this.options = options;
 
-    //this.collection.off();
-    //this.collection.on('sync', this.render, this);
-
     this.render();
 
     $('#listBlogs').html(this.$el);
@@ -34,8 +31,6 @@ App.Views.AuthorPost = Parse.View.extend ({
     this.$el.empty();
 
       _.each(this.collection, function (s) {
-
-        console.log(s);
 
         if (s.attributes.draft === false){
 
