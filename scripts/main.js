@@ -139,6 +139,7 @@ $( document ).ready(function(){
     events: {
       'submit #BlogOne' : 'updateBlog',
       'click #delete' : 'deleteBlog',
+      'submit #BlogOne' : 'postDraft',
     },
 
     template: _.template($('#singleBlog').html()),
@@ -180,6 +181,26 @@ $( document ).ready(function(){
 
       // Remove Holiday
       this.options.blogs.destroy();
+
+      // Return to home page
+      App.router.navigate('', {trigger: true});
+
+    },
+
+    postDraft: function(e) {
+      e.preventDefault();
+
+      // Update our Model Instance
+      this.options.blogs.set({
+        title: $("#update_title").val(),
+        content: $("#update_content").val(),
+        tags: $("#update_category").val(),
+        draft: false,
+      });
+      
+
+      // Save Instance
+      this.options.blogs.save();
 
       // Return to home page
       App.router.navigate('', {trigger: true});
@@ -232,7 +253,81 @@ App.Views.ListBlogs = Parse.View.extend ({
 
       success: function(results){
 
-        console.log(results);
+        self.collection.models = results;
+
+        self.render();
+      }
+
+    });
+
+  },
+
+  render: function(){
+
+    var self = this;
+
+    //clears our element
+    this.$el.empty();
+
+      this.collection.each(function (s) {
+
+          if (s.attributes.draft === true) {
+        self.$el.append(self.template(s.toJSON()));
+
+        }
+
+      })
+
+      return this;
+    },
+
+  makePublic: function () {
+
+
+  }
+
+});
+
+}());
+
+//this is Draft Views By User
+(function(){
+
+App.Views.AuthorPost = Parse.View.extend ({
+
+  tagName: 'ul',
+  className: 'Author',
+
+    events: {
+
+    },
+
+    template: _.template($('#mainblog').html()),
+
+  initialize: function(options) {
+
+    this.options = options;
+
+    //this.collection.off();
+    //this.collection.on('sync', this.render, this);
+
+    this.authorQuery();
+
+    $('#listBlogs').html(this.$el);
+    console.log(this.collection);
+  },
+
+  authorQuery: function(){
+
+    var self= this;
+
+    var author = new Parse.Query(App.Models.Post);
+
+    author.equalTo('user', App.user.attributes.username);
+
+    author.find({
+
+      success: function(results){
 
         self.collection.models = results;
 
@@ -251,21 +346,22 @@ App.Views.ListBlogs = Parse.View.extend ({
     this.$el.empty();
 
       this.collection.each(function (s) {
-          if (s.attributes.draft === true) {
-        self.$el.append(self.template(s.toJSON()));
+
+        console.log(s);
+
+        if (s.attributes.draft === false){
+
+          self.$el.append(self.template(s.toJSON()));
         }
 
       })
 
       return this;
-    },
 
-  makePublic: function () {
-
-    
-  }
+  },
 
 });
+
 
 }());
 
@@ -351,10 +447,10 @@ App.Views.PublicBlogs = Parse.View.extend ({
 
     this.options = options;
 
-    this.render();
-
     this.collection.off();
     this.collection.on('sync', this.render, this);
+
+    this.render();
 
     $('#listBlogs').html(this.$el);
 
@@ -367,7 +463,17 @@ App.Views.PublicBlogs = Parse.View.extend ({
     //clears our element
     this.$el.empty();
 
-      this.collection.each(function (s) {
+    var sort_collection = this.collection;
+
+    sort_collection = this.collection.sortBy (function (model){
+       console.log(model);
+      return -parseInt(model.createdAt)
+
+    });
+
+    console.log(sort_collection);
+
+      _.each(sort_collection, function (s) {
           if (s.attributes.draft === false) {
         self.$el.append(self.template(s.toJSON()));
       }
@@ -440,13 +546,6 @@ App.Views.Login = Parse.View.extend ({
     App.router.navigate('', { trigger: true });
   },
 
-//  logoutUser: function(e) {
-  //  e.preventDefault();
-
-    //Parse.User.logOut();
-    //console.log(App.user);
-
-  //}
 });
 
 }());
@@ -547,6 +646,7 @@ $( document ).ready(function(){
       'edit/:id' : 'editBlog',
       'draft' : 'showdrafts',
       'comment/:id' : 'commentBlog',
+      'author/:user' : 'authorBlog',
     },
 
     home: function(){
@@ -583,6 +683,15 @@ $( document ).ready(function(){
       new App.Views.SingleBlog({blogs: c});
       $('.logIn').hide();
     },
+
+    authorBlog: function(user){
+      console.log(user);
+      console.log(App.blog_posts);
+        var c = App.blog_posts.get(user);
+      console.log(c);
+      new App.Views.AuthorPost({collection: c});
+      $('.logIn').hide();
+    }
 
 
   });
