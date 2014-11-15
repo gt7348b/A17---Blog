@@ -331,9 +331,6 @@ App.Views.AuthorPost = Parse.View.extend ({
 
     this.options = options;
 
-    //this.collection.off();
-    //this.collection.on('sync', this.render, this);
-
     this.render();
 
     $('#listBlogs').html(this.$el);
@@ -350,8 +347,6 @@ App.Views.AuthorPost = Parse.View.extend ({
 
       _.each(this.collection, function (s) {
 
-        console.log(s);
-
         if (s.attributes.draft === false){
 
           self.$el.append(self.template(s.toJSON()));
@@ -365,6 +360,53 @@ App.Views.AuthorPost = Parse.View.extend ({
 
 });
 
+
+}());
+
+(function() {
+
+App.Views.CategoryPost = Parse.View.extend({
+
+  tagname: 'ul',
+  className: 'Category',
+
+  events: {
+
+  },
+
+  template: _.template($('#publicblog').html()),
+
+initialize: function(options) {
+
+  this.options = options;
+
+  this.render();
+
+  $('#listBlogs').html(this.$el);
+  console.log(this.collection);
+},
+
+  render: function(){
+
+    var self = this;
+
+  //clears our element
+    this.$el.empty();
+
+    _.each(this.collection, function (s) {
+
+      if(s.attributes.draft === false){
+
+    self.$el.append(self.template(s.toJSON()));
+
+      }
+
+    })
+
+    return this;
+  },
+
+});
 
 }());
 
@@ -469,12 +511,10 @@ App.Views.PublicBlogs = Parse.View.extend ({
     var sort_collection = this.collection;
 
     sort_collection = this.collection.sortBy (function (model){
-       console.log(model);
+
       return -parseInt(model.createdAt)
 
     });
-
-    console.log(sort_collection);
 
       _.each(sort_collection, function (s) {
           if (s.attributes.draft === false) {
@@ -664,9 +704,8 @@ $( document ).ready(function(){
       'edit/:id' : 'editBlog',
       'draft' : 'showdrafts',
       'comment/:id' : 'commentBlog',
-    //  'sort/:sortby' : 'home',
-    //  'sort/:sortby' : 'showdrafts',
       'author/:user' : 'authorBlog',
+      'category/:tags' : 'tagBlog',
 
     },
 
@@ -716,8 +755,6 @@ $( document ).ready(function(){
     },
 
     authorBlog: function(user){
-      console.log(user);
-      console.log(App.blog_posts);
 
       var author = new Parse.Query(App.Models.Post),
           c;
@@ -734,10 +771,32 @@ $( document ).ready(function(){
           $('.logIn').hide();
         }
       });
+    }, 
 
+    tagBlog: function(tags){
+      console.log('hi');
+      console.log(tags);
+      console.log(App.blog_posts);
 
-    }
+      var category = new Parse.Query(App.Models.Post),
+        c;
 
+      category.equalTo('tags', tags);
+
+      category.find({
+
+        success: function(results){
+
+          c = results;
+
+          new App.Views.CategoryPost({collection: c});
+          $('.logIn').hide();
+
+        }
+
+      });
+
+    },
 
   });
 
