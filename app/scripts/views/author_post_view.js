@@ -10,7 +10,7 @@ App.Views.AuthorPost = Parse.View.extend ({
 
     },
 
-    template: _.template($('#mainblog').html()),
+    template: _.template($('#publicblog').html()),
 
   initialize: function(options) {
 
@@ -19,32 +19,12 @@ App.Views.AuthorPost = Parse.View.extend ({
     //this.collection.off();
     //this.collection.on('sync', this.render, this);
 
-    this.authorQuery();
+    this.render();
 
     $('#listBlogs').html(this.$el);
     console.log(this.collection);
   },
 
-  authorQuery: function(){
-
-    var self= this;
-
-    var author = new Parse.Query(App.Models.Post);
-
-    author.equalTo('user', App.user.attributes.username);
-
-    author.find({
-
-      success: function(results){
-
-        self.collection.models = results;
-
-        self.render();
-      }
-
-    });
-
-  },
 
   render: function(){
 
@@ -53,7 +33,7 @@ App.Views.AuthorPost = Parse.View.extend ({
     //clears our element
     this.$el.empty();
 
-      this.collection.each(function (s) {
+      _.each(this.collection, function (s) {
 
         console.log(s);
 

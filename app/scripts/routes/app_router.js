@@ -74,7 +74,7 @@ $( document ).ready(function(){
       var author = new Parse.Query(App.Models.Post),
           c;
 
-      author.equalTo('user', App.user.attributes.username);
+      author.equalTo('user', user);
 
       author.find({
 
