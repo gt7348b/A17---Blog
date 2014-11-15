@@ -16,6 +16,8 @@ $( document ).ready(function(){
       'edit/:id' : 'editBlog',
       'draft' : 'showdrafts',
       'comment/:id' : 'commentBlog',
+    //  'sort/:sortby' : 'home',
+    //  'sort/:sortby' : 'showdrafts',
     },
 
     home: function(){

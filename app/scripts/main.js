@@ -40,11 +40,13 @@ $( document ).ready(function(){
       $('#logOut').text('Log In');
       $('.addBtn').hide();
       $('.draftBtn').hide();
+      $('#updatePublic').hide();
     } else {
       currUsr = 'Welcome ' + App.user.attributes.username;
       $('#logOut').text('Log Out');
       $('.addBtn').show();
       $('.draftBtn').show();
+      $('.publicWrite #updatePublic').show();
     }
     $('#loggedIn').html(currUsr);
   };

@@ -48,13 +48,6 @@ App.Views.Login = Parse.View.extend ({
     App.router.navigate('', { trigger: true });
   },
 
-//  logoutUser: function(e) {
-  //  e.preventDefault();
-
-    //Parse.User.logOut();
-    //console.log(App.user);
-
-  //}
 });
 
 }());

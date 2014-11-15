@@ -12,6 +12,7 @@ $( document ).ready(function(){
       user: '',
       submitted: '',
       comments: '',
+      createdAt: '',
     },
 
     idAttribute: 'objectID',
