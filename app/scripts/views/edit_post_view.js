@@ -8,6 +8,7 @@
     events: {
       'submit #BlogOne' : 'updateBlog',
       'click #delete' : 'deleteBlog',
+      'submit #BlogOne' : 'postDraft',
     },
 
     template: _.template($('#singleBlog').html()),
@@ -49,6 +50,26 @@
 
       // Remove Holiday
       this.options.blogs.destroy();
+
+      // Return to home page
+      App.router.navigate('', {trigger: true});
+
+    },
+
+    postDraft: function(e) {
+      e.preventDefault();
+
+      // Update our Model Instance
+      this.options.blogs.set({
+        title: $("#update_title").val(),
+        content: $("#update_content").val(),
+        tags: $("#update_category").val(),
+        draft: false,
+      });
+      
+
+      // Save Instance
+      this.options.blogs.save();
 
       // Return to home page
       App.router.navigate('', {trigger: true});

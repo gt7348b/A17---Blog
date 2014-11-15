@@ -1,15 +1,13 @@
 //this is Draft Views By User
+(function(){
 
-
-$( document ).ready(function(){
-
-App.Views.ListBlogs = Parse.View.extend ({
+App.Views.AuthorPost = Parse.View.extend ({
 
   tagName: 'ul',
-  className: 'Show',
+  className: 'Author',
 
     events: {
-      'click #poster' : 'makePublic',
+
     },
 
     template: _.template($('#mainblog').html()),
@@ -18,25 +16,24 @@ App.Views.ListBlogs = Parse.View.extend ({
 
     this.options = options;
 
-    this.collection.off();
-    this.collection.on('sync', this.render, this);
-    this.collection.on('destroy', this.render, this);
+    //this.collection.off();
+    //this.collection.on('sync', this.render, this);
 
-    this.userQuery();
+    this.authorQuery();
 
     $('#listBlogs').html(this.$el);
     console.log(this.collection);
   },
 
-  userQuery: function(){
+  authorQuery: function(){
 
     var self= this;
 
-    var user_name = new Parse.Query(App.Models.Post);
+    var author = new Parse.Query(App.Models.Post);
 
-    user_name.equalTo('user', App.user.attributes.username);
+    author.equalTo('user', App.user.attributes.username);
 
-    user_name.find({
+    author.find({
 
       success: function(results){
 
@@ -58,21 +55,20 @@ App.Views.ListBlogs = Parse.View.extend ({
 
       this.collection.each(function (s) {
 
-          if (s.attributes.draft === true) {
-        self.$el.append(self.template(s.toJSON()));
+        console.log(s);
 
+        if (s.attributes.draft === false){
+
+          self.$el.append(self.template(s.toJSON()));
         }
 
       })
 
       return this;
-    },
 
-  makePublic: function () {
-
-
-  }
+  },
 
 });
+
 
 }());

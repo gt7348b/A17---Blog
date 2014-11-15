@@ -64,15 +64,19 @@
     <script type='text/template' id='publicblog'>
       <h4>Public</h4>
       <li class="publicView" id="<%= objectId %>">
-        <a href="#/comment/<%= objectId %>"><div class="publicRead">
+        <div class="publicRead"><a href="#/comment/<%= objectId %>">
+            <div>
             <h4><%= title %> </h4>
             <p><%= content %></p>
+          </div></a>
+
             <ul class="publicWrite">
-              <li><%= user %></li>
+              <a href='#/author/<%= user %>'><li><%= user %></li></a>
               <li><%= createdAt %></li>
               <li><%= tags %></li>
-            </a>
+
             </ul>
+
         </div>
       </li>
     </script>
@@ -178,6 +182,7 @@
         <script src="scripts/views/add_post_view.js"></script>
         <script src="scripts/views/edit_post_view.js"></script>
         <script src="scripts/views/list_post_view.js"></script>
+        <script src="scripts/views/author_post_view.js"></script>
         <script src="scripts/views/single_blog.js"></script>
         <script src="scripts/views/public_view.js"></script>
         <script src="scripts/views/user_login_view.js"></script>
