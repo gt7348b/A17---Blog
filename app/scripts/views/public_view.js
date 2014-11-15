@@ -16,10 +16,10 @@ App.Views.PublicBlogs = Parse.View.extend ({
 
     this.options = options;
 
-    this.render();
-
     this.collection.off();
     this.collection.on('sync', this.render, this);
+
+    this.render();
 
     $('#listBlogs').html(this.$el);
 
@@ -32,7 +32,17 @@ App.Views.PublicBlogs = Parse.View.extend ({
     //clears our element
     this.$el.empty();
 
-      this.collection.each(function (s) {
+    var sort_collection = this.collection;
+
+    sort_collection = this.collection.sortBy (function (model){
+       console.log(model);
+      return -parseInt(model.createdAt)
+
+    });
+
+    console.log(sort_collection);
+
+      _.each(sort_collection, function (s) {
           if (s.attributes.draft === false) {
         self.$el.append(self.template(s.toJSON()));
       }

@@ -18,6 +18,8 @@ $( document ).ready(function(){
       'comment/:id' : 'commentBlog',
     //  'sort/:sortby' : 'home',
     //  'sort/:sortby' : 'showdrafts',
+      'author/:user' : 'authorBlog',
+
     },
 
     home: function(){
@@ -64,6 +66,29 @@ $( document ).ready(function(){
         location.reload();
       });
     },
+
+    authorBlog: function(user){
+      console.log(user);
+      console.log(App.blog_posts);
+
+      var author = new Parse.Query(App.Models.Post),
+          c;
+
+      author.equalTo('user', App.user.attributes.username);
+
+      author.find({
+
+        success: function(results){
+
+          c = results;
+
+          new App.Views.AuthorPost({collection: c});
+          $('.logIn').hide();
+        }
+      });
+
+
+    }
 
 
   });
