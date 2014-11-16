@@ -25,6 +25,13 @@
       this.$el.empty();
       this.$el.html(this.template(this.options.blogs.toJSON()));
       console.log(this);
+
+      if (this.options.showHeader) {
+        $('#blogposts h1 a').html('');
+      } else {
+        $('#blogposts h1 a').html('All Posts');
+      }
+
     },
 
     updateBlog: function (e) {

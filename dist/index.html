@@ -8,7 +8,7 @@
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
     <link rel="stylesheet" href="styles/vendor.css">
-
+    <link href='http://fonts.googleapis.com/css?family=Poiret+One|Fjalla+One|Nobile' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="styles/main.css">
 
     <script src="scripts/vendor/modernizr.js"></script>
@@ -26,25 +26,25 @@
     </div>
 
     <div class="container">
-
       <div class="logIn">
           <div id="logged"></div>
           <div id="newUser"></div>
       </div>
 
       <div id='blogposts'>
+         <h1><a href="#/">All Blogs</a></h1>
         <div id="listBlogs"></div>
       </div>
 
+<!-- Draft View of Posts -->
     <script type='text/template' id='mainblog'>
-      <h4>Draft</h4>
       <li class="blogger" id="<%= objectId %>">
         <a href="#/comment/<%= objectId %>"><div class="blogged">
-            <h4><%= title %> </h4>
-            <p><%= content %></p>
+            <h3><%= title %> </h3>
+            <p id=draftCNT><%= content %></p>
             <ul class="writer">
-              <li><%= user %></li>
-              <li><%= moment(createdAt).format("MMMM Do, YYYY") %></li>
+              <li><%= moment(createdAt).format("MMMM Do, YYYY") %></li> &loz;
+              <li>Author: <%= user %></li> &loz;
               <li><%= tags %></li>
             </a>
             <a href="#/edit/<%= objectId %>"><button id="updateButton">Edit</button></a>
@@ -53,17 +53,17 @@
       </li>
     </script>
 
+<!-- Public View of Posts -->
     <script type='text/template' id='publicblog'>
-      <h4>Public</h4>
       <li class="publicView" id="<%= objectId %>">
         <div class="publicRead"><a href="#/comment/<%= objectId %>">
             <div>
-            <h4><%= title %> </h4>
-            <p><%= content %></p>
+            <h3><%= title %> </h3>
+            <p id=publicCNT><%= content %></p>
           </div></a>
             <ul class="publicWrite">
-              <a href='#/author/<%= user %>'><li><%= user %></li></a>
-             <li><%= moment(createdAt).format("MMMM Do, YYYY") %></li>
+              <li><%= moment(createdAt).format("MMMM Do, YYYY") %></li> &loz;
+              <a href='#/author/<%= user %>'><li>Author: <%= user %></li></a> &loz;
               <a href='#/category/<%= tags %>'><li><%= tags %></li></a>
             </a>
             </ul>
@@ -71,17 +71,17 @@
       </li>
     </script>
 
+<!-- View of Posts by User -->
     <script type='text/template' id='myposts'>
-      <h4>My Posts</h4>
       <li class="mypostview" id="<%= objectId %>">
         <div class="postRead">
             <div>
-            <h4><%= title %> </h4>
+            <h3><%= title %> </h3>
             <p><%= content %></p>
           </div>
             <ul class="postWrite">
-              <a href='#/author/<%= user %>'><li><%= user %></li></a>
-             <li><%= moment(createdAt).format("MMMM Do, YYYY") %></li>
+              <li><%= moment(createdAt).format("MMMM Do, YYYY") %></li>
+              <a href='#/author/<%= user %>'><li>Author: <%= user %></li></a>
               <a href='#/category/<%= tags %>'><li><%= tags %></li></a>
               <a href="#/edit/<%= objectId %>"><button id="editMine">Edit</button></a>
             </ul>
@@ -89,10 +89,12 @@
       </li>
     </script>
 
+<!-- Comments -->
     <script type="text/template" id="CommentTemp">
       <li><%= comments %></li>
     </script>
 
+<!-- Single View of A Blog with Comments -->
     <script type="text/template" id="ReadTemp">
       <li class="readIt" id="<%= objectId %>">
        <div class="blog_info">
@@ -108,6 +110,7 @@
       </li>
     </script>
 
+<!-- Single View of Post for Editing -->
    <script type="text/template" id="singleBlog">
     <h2>Edit Your Blog</h2>
       <li class="soloBlog" id="<%= objectId %>">
@@ -115,7 +118,6 @@
           <div class="blog-header">
             <input id='update_title' type='text' value="<%= title%>" placeholder='Enter a Title'/>
             <textarea id='update_content' type='text' value="<%= content %>" placeholder='Enter content'/>
-
             <select id="update_category" value="<%= tags %>">
                     <option value= '<%= tags %>'><%= tags %></option>
                     <option value="General News">General News</option>
@@ -134,6 +136,7 @@
       </li>
     </script>
 
+<!-- Login Script -->
     <script type='text/template' id='usersignin'>
       <h3>Login</h3>
       <form id='login'>
@@ -144,6 +147,7 @@
       </form>
     </script>
 
+<!-- Sign Up Script -->
     <script type='text/template' id='adduser'>
       <h3>Signup</h3>
       <form id='newuser'>
@@ -152,11 +156,10 @@
         <input id='confirmpword' type='password' placeholder = 'Confirm Password'/>
         <button>Submit New User</button>
       </form>
-
     </script>
 
+<!-- Add a Post -->
     <script type='text/template' id='addpost'>
-      <h3>Add New Post</h3>
       <form id='newpost'>
         <input id='input_title' type='text' placeholder='Enter a Title'/>
         <textarea id='blogcontent' type='text' placeholder='Enter content'/>

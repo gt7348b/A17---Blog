@@ -68,6 +68,13 @@ App.Views.MyBlogs = Parse.View.extend ({
 
       })
 
+      if (this.options.showHeader) {
+        $('#blogposts h1 a').html('Edit Public Posts');
+      } else {
+        $('#blogposts h1 a').html('All Posts');
+      }
+
+
       return this;
 
   },

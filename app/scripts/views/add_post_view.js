@@ -18,6 +18,12 @@ $( document ).ready(function(){
     render: function(){
       this.$el.html($('#addpost').html());
 
+      if (this.options.showHeader) {
+        $('#blogposts h1 a').html('Add New Post');
+      } else {
+        $('#blogposts h1 a').html('All Posts');
+      }
+
     },
 
     addpost: function(draft){

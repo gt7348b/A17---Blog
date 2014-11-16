@@ -39,6 +39,13 @@ App.Views.AuthorPost = Parse.View.extend ({
 
       })
 
+      if (this.options.showHeader) {
+        $('#blogposts h1 a').html('Blogs By Author');
+      } else {
+        $('#blogposts h1 a').html('All Posts');
+      }
+
+
       return this;
 
   },

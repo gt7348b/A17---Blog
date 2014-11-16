@@ -82,6 +82,12 @@ $( document ).ready(function(){
     render: function(){
       this.$el.html($('#addpost').html());
 
+      if (this.options.showHeader) {
+        $('#blogposts h1 a').html('Add New Post');
+      } else {
+        $('#blogposts h1 a').html('All Posts');
+      }
+
     },
 
     addpost: function(draft){
@@ -159,6 +165,13 @@ $( document ).ready(function(){
       this.$el.empty();
       this.$el.html(this.template(this.options.blogs.toJSON()));
       console.log(this);
+
+      if (this.options.showHeader) {
+        $('#blogposts h1 a').html('');
+      } else {
+        $('#blogposts h1 a').html('All Posts');
+      }
+
     },
 
     updateBlog: function (e) {
@@ -280,6 +293,12 @@ App.Views.ListBlogs = Parse.View.extend ({
 
       });
 
+      if (this.options.showHeader) {
+        $('#blogposts h1 a').html('My Drafts');
+      } else {
+        $('#blogposts h1 a').html('All Posts');
+      }
+
       return this;
     },
 
@@ -327,6 +346,13 @@ App.Views.AuthorPost = Parse.View.extend ({
         }
 
       })
+
+      if (this.options.showHeader) {
+        $('#blogposts h1 a').html('Blogs By Author');
+      } else {
+        $('#blogposts h1 a').html('All Posts');
+      }
+
 
       return this;
 
@@ -377,6 +403,13 @@ initialize: function(options) {
 
     })
 
+    if (this.options.showHeader) {
+      $('#blogposts h1 a').html('Blogs by Category');
+    } else {
+      $('#blogposts h1 a').html('All Posts');
+    }
+
+
     return this;
   },
 
@@ -423,6 +456,13 @@ $( document ).ready(function () {
           })
         }
       })
+
+    if (this.options.showHeader) {
+      $('#blogposts h1 a').html('');
+    } else {
+      $('#blogposts h1 a').html('All Posts');
+    }
+
 
     },
 
@@ -708,6 +748,13 @@ App.Views.MyBlogs = Parse.View.extend ({
 
       })
 
+      if (this.options.showHeader) {
+        $('#blogposts h1 a').html('Edit Public Posts');
+      } else {
+        $('#blogposts h1 a').html('All Posts');
+      }
+
+
       return this;
 
   },
@@ -742,7 +789,10 @@ $( document ).ready(function(){
     },
 
     home: function(){
-      new App.Views.PublicBlogs({ collection: App.blog_posts});
+      new App.Views.PublicBlogs({ collection: App.blog_posts, showHeader: false});
+      $('.homeBtn').click(function() {
+        location.reload();
+      });
       $('.logIn').hide();
     },
 
@@ -750,17 +800,23 @@ $( document ).ready(function(){
       if(App.user) return App.router.navigate('', {trigger: true});
       new App.Views.Login();
       new App.Views.SignUp();
-      new App.Views.PublicBlogs({ collection: App.blog_posts});
+      new App.Views.PublicBlogs({ collection: App.blog_posts, showHeader: false});
+      $('#logOut').click(function() {
+        location.reload();
+      });
       $('.logIn').show();
     },
 
     showdrafts: function(){
-      new App.Views.ListBlogs({ collection: App.blog_posts});
+      new App.Views.ListBlogs({ collection: App.blog_posts, showHeader: true});
       $('.logIn').hide();
+      $('.draftBtn').click(function() {
+        location.reload();
+      });
     },
 
     addPost: function(){
-      new App.Views.AddPost();
+      new App.Views.AddPost({showHeader: true});
       $('.logIn').hide();
       $('#postIt').click(function() {
         location.reload();
@@ -773,13 +829,13 @@ $( document ).ready(function(){
 
     editBlog: function(id){
       var e = App.blog_posts.get(id);
-     new App.Views.EditBlog({blogs: e});
+     new App.Views.EditBlog({blogs: e, showHeader: true});
      $('.logIn').hide();
     },
 
     commentBlog: function(id){
       var c = App.blog_posts.get(id);
-      new App.Views.SingleBlog({blogs: c});
+      new App.Views.SingleBlog({blogs: c, showHeader: true});
       $('.logIn').hide();
       $('#commentPost').click(function() {
         location.reload();
@@ -799,7 +855,7 @@ $( document ).ready(function(){
 
           c = results;
 
-          new App.Views.AuthorPost({collection: c});
+          new App.Views.AuthorPost({collection: c, showHeader: true});
           $('.logIn').hide();
         }
       });
@@ -821,7 +877,7 @@ $( document ).ready(function(){
 
           c = results;
 
-          new App.Views.CategoryPost({collection: c});
+          new App.Views.CategoryPost({collection: c, showHeader: true});
           $('.logIn').hide();
 
         }
@@ -831,7 +887,7 @@ $( document ).ready(function(){
     },
 
     mypostEdit: function() {
-      new App.Views.MyBlogs({ collection: App.blog_posts});
+      new App.Views.MyBlogs({ collection: App.blog_posts, showHeader: true});
       $('.logIn').hide();
     }
 

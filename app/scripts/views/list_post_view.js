@@ -64,6 +64,12 @@ App.Views.ListBlogs = Parse.View.extend ({
 
       });
 
+      if (this.options.showHeader) {
+        $('#blogposts h1 a').html('My Drafts');
+      } else {
+        $('#blogposts h1 a').html('All Posts');
+      }
+
       return this;
     },
 

@@ -38,6 +38,13 @@ initialize: function(options) {
 
     })
 
+    if (this.options.showHeader) {
+      $('#blogposts h1 a').html('Blogs by Category');
+    } else {
+      $('#blogposts h1 a').html('All Posts');
+    }
+
+
     return this;
   },
 

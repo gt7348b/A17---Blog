@@ -38,6 +38,13 @@ $( document ).ready(function () {
         }
       })
 
+    if (this.options.showHeader) {
+      $('#blogposts h1 a').html('');
+    } else {
+      $('#blogposts h1 a').html('All Posts');
+    }
+
+
     },
 
     commentBlog: function (e) {
