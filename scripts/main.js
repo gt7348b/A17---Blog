@@ -938,12 +938,14 @@ $( document ).ready(function(){
       $('.addBtn').hide();
       $('.draftBtn').hide();
       $('#updatePublic').hide();
+      $('#edit_myposts').hide();
     } else {
       currUsr = 'Welcome ' + App.user.attributes.username;
       $('#logOut').text('Log Out');
       $('.addBtn').show();
       $('.draftBtn').show();
       $('.publicWrite #updatePublic').show();
+      $('#edit_myposts').show();
     }
     $('#loggedIn').html(currUsr);
   };
