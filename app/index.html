@@ -27,7 +27,7 @@
       <h1>J&J's Awesome Set of Stuff!</h1>
       <a href="#/start"</a><button id="logOut">Logout</button></a>
       <a href="#/add" class="addBtn"><button>Add New Post</button></a>
-      <a href="#/myposts"><button id="edit_myposts">Edit My Posts</button></a>
+      <a href="#/myposts"><button id="edit_myposts">Edit Public Posts</button></a>
       <a href="#/draft" class="draftBtn"><button>Drafts</button></a>
       <a href="#/" class="homeBtn"><button>Home</button></a>
       <span id="loggedIn"></span>
@@ -135,7 +135,7 @@
         <form id="BlogOne">
           <div class="blog-header">
             <input id='update_title' type='text' value="<%= title %>" placeholder='Enter a Title'/>
-            <textarea id='update_content' type='text' value="<%= content %>" placeholder='Enter content'></textarea>
+            <textarea id='update_content' type='text' placeholder='Enter content'><%= content %></textarea>
             <select id="update_category" value="<%= tags %>">
                     <option value= '<%= tags %>'><%= tags %></option>
                     <option value="General News">General News</option>
