@@ -11,6 +11,9 @@ The following students participated in this project.
 ## We used several resources for this site:
 
 1. Parse
+2. Google Fonts
+3. Moment.js
+4. Rust & Turqoise background image from Industrial Decay by Fresh Design Elements
 
 If you'd like to copy this site, please clone from github at (....) and then:
 
