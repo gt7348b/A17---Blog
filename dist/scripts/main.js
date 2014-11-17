@@ -939,6 +939,7 @@ $( document ).ready(function(){
       $('.draftBtn').hide();
       $('#updatePublic').hide();
       $('#edit_myposts').hide();
+      App.router.navigate('start', {trigger: true});
     } else {
       currUsr = 'Welcome ' + App.user.attributes.username;
       $('#logOut').text('Log Out');
