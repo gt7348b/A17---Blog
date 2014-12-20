@@ -917,6 +917,8 @@ $( document ).ready(function(){
       //console.log('on-on');
       Parse.history.start();
 
+      App.updateUser();
+
     })
 
     // Log Out
@@ -950,6 +952,6 @@ $( document ).ready(function(){
     }
     $('#loggedIn').html(currUsr);
   };
-    App.updateUser();
+
 
 }());

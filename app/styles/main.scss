@@ -15,10 +15,11 @@ $Nobile: 'Nobile', sans-serif;
 $Paradiso: HSLA(193, 24%, 43%, 1);
 $Mordant_Red: HSLA(2, 100%, 34%, 1);
 
+
 // Custom Styles
 body {
   font-family: $Nobile;
-  background: url('../styles/images/Rust-turquoiseblue.jpg')no-repeat center center;
+  background: url(../styles/images/Rust-turquoiseblue.jpg)no-repeat center center;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -129,12 +130,12 @@ body {
 
 #blogposts {
   float: right;
-  width: 800px;
+  width: 700px;
   background-color: white;
   border: 1px solid black;
   border-radius: 6px;
   padding: 60px;
-  margin-right: 280px;
+  margin-right: 148px;
 
   h2 {
     font-family: $Fjalla;
